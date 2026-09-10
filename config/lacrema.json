@@ -1,0 +1,868 @@
+{
+  "version": "2.0.0",
+  "updated": "2026-09-10",
+  "property": {
+    "name": "B&B Lacrêma",
+    "tagline": {
+      "it": "Tra gli ulivi, sopra il mare di Finale.",
+      "en": "Among the olive trees, above the Finale sea.",
+      "de": "Zwischen Olivenbäumen, über dem Meer von Finale."
+    },
+    "address": "Vico dei Ferri 7, 17024 Finale Ligure (SV)",
+    "coords": [
+      44.1879211,
+      8.3549945
+    ],
+    "website": "https://www.beblacrema.it",
+    "logo": "assets/img/logo.png",
+    "languages": [
+      "it",
+      "en",
+      "de"
+    ],
+    "defaultLanguage": "it"
+  },
+  "host": {
+    "name": "Mario",
+    "phone": "+393534737296",
+    "phoneDisplay": "+39 353 473 7296",
+    "greeting": {
+      "it": "Benvenuto a Lacrêma. Se ti serve qualcosa, chiamami: rispondo sempre.",
+      "en": "Welcome to Lacrêma. If you need anything, call me — I always answer.",
+      "de": "Willkommen im Lacrêma. Wenn Sie etwas brauchen, rufen Sie mich an — ich gehe immer ran."
+    }
+  },
+  "wifi": {
+    "ssid": "DA_COMPLETARE",
+    "password": "DA_COMPLETARE",
+    "note": {
+      "it": "Copre tutta la casa, il giardino e la terrazza.",
+      "en": "Covers the whole house, the garden and the terrace.",
+      "de": "Deckt das ganze Haus, den Garten und die Terrasse ab."
+    }
+  },
+  "travelNote": {
+    "it": "Lacrêma è in collina. I tempi a piedi sono stime: in discesa all'andata, più lenti al ritorno.",
+    "en": "Lacrêma sits on the hillside. Walking times are estimates — downhill on the way out, slower coming back.",
+    "de": "Das Lacrêma liegt am Hang. Gehzeiten sind Schätzungen — bergab hin, langsamer zurück."
+  },
+  "sections": [
+    {
+      "id": "checkin",
+      "icon": "key",
+      "label": {
+        "it": "Check-in",
+        "en": "Check-in",
+        "de": "Check-in"
+      },
+      "type": "rows",
+      "rows": [
+        {
+          "key": {
+            "it": "Orario",
+            "en": "Time",
+            "de": "Uhrzeit"
+          },
+          "val": {
+            "it": "14:00 – 16:00",
+            "en": "14:00 – 16:00",
+            "de": "14:00 – 16:00"
+          },
+          "big": true
+        },
+        {
+          "key": {
+            "it": "Arrivo fuori orario",
+            "en": "Late arrival",
+            "de": "Späte Anreise"
+          },
+          "val": {
+            "it": "DA_COMPLETARE — cosa fare se si arriva dopo le 16.",
+            "en": "TO BE COMPLETED",
+            "de": "ZU ERGÄNZEN"
+          }
+        },
+        {
+          "key": {
+            "it": "Documenti",
+            "en": "Documents",
+            "de": "Dokumente"
+          },
+          "val": {
+            "it": "Serve un documento d'identità per ogni ospite: è un obbligo di legge per la comunicazione alla Questura.",
+            "en": "An ID document is required for each guest — a legal requirement for police registration.",
+            "de": "Für jeden Gast wird ein Ausweisdokument benötigt — gesetzlich vorgeschrieben."
+          }
+        },
+        {
+          "key": {
+            "it": "Parcheggio",
+            "en": "Parking",
+            "de": "Parken"
+          },
+          "val": {
+            "it": "Privato e gratuito, dentro la proprietà.",
+            "en": "Private and free, on the property.",
+            "de": "Privat und kostenlos, auf dem Grundstück."
+          }
+        }
+      ]
+    },
+    {
+      "id": "wifi",
+      "icon": "wifi",
+      "label": {
+        "it": "Wi-Fi",
+        "en": "Wi-Fi",
+        "de": "WLAN"
+      },
+      "type": "wifi"
+    },
+    {
+      "id": "rules",
+      "icon": "doc",
+      "label": {
+        "it": "Regole",
+        "en": "House rules",
+        "de": "Hausregeln"
+      },
+      "type": "rows",
+      "rows": [
+        {
+          "key": {
+            "it": "Animali",
+            "en": "Pets",
+            "de": "Haustiere"
+          },
+          "val": {
+            "it": "Ammessi solo nella camera Fiordaliso.",
+            "en": "Allowed in the Fiordaliso room only.",
+            "de": "Nur im Zimmer Fiordaliso erlaubt."
+          }
+        },
+        {
+          "key": {
+            "it": "Bambini",
+            "en": "Children",
+            "de": "Kinder"
+          },
+          "val": {
+            "it": "Fino a 2 anni gratis in culla. Fino a 5 anni gratis nei letti esistenti. Dai 5 anni, tariffa intera.",
+            "en": "Under 2 free in a cot. Under 5 free in existing beds. From 5 years, full rate.",
+            "de": "Unter 2 Jahren gratis im Kinderbett. Unter 5 Jahren gratis in vorhandenen Betten. Ab 5 Jahren voller Preis."
+          }
+        },
+        {
+          "key": {
+            "it": "Quiete",
+            "en": "Quiet hours",
+            "de": "Ruhezeiten"
+          },
+          "val": {
+            "it": "DA_COMPLETARE — orario di silenzio.",
+            "en": "TO BE COMPLETED",
+            "de": "ZU ERGÄNZEN"
+          }
+        },
+        {
+          "key": {
+            "it": "Fumo",
+            "en": "Smoking",
+            "de": "Rauchen"
+          },
+          "val": {
+            "it": "DA_COMPLETARE — dove è consentito.",
+            "en": "TO BE COMPLETED",
+            "de": "ZU ERGÄNZEN"
+          }
+        },
+        {
+          "key": {
+            "it": "Barbecue",
+            "en": "Barbecue",
+            "de": "Grill"
+          },
+          "val": {
+            "it": "Disponibile tutto l'anno. Avvisa Mario prima di accendere.",
+            "en": "Available all year. Let Mario know before lighting it.",
+            "de": "Ganzjährig verfügbar. Bitte Mario vorher Bescheid geben."
+          }
+        },
+        {
+          "key": {
+            "it": "Pagamenti",
+            "en": "Payment",
+            "de": "Zahlung"
+          },
+          "val": {
+            "it": "Visa, Mastercard, Maestro, American Express, Diners Club. La carta può essere preautorizzata prima dell'arrivo.",
+            "en": "Visa, Mastercard, Maestro, American Express, Diners Club. Cards may be pre-authorised before arrival.",
+            "de": "Visa, Mastercard, Maestro, American Express, Diners Club. Karten können vorautorisiert werden."
+          }
+        },
+        {
+          "key": {
+            "it": "Cancellazione",
+            "en": "Cancellation",
+            "de": "Stornierung"
+          },
+          "val": {
+            "it": "Gratuita fino a 10 giorni prima dell'arrivo.",
+            "en": "Free up to 10 days before arrival.",
+            "de": "Kostenlos bis 10 Tage vor Anreise."
+          }
+        }
+      ]
+    },
+    {
+      "id": "services",
+      "icon": "sofa",
+      "label": {
+        "it": "Servizi",
+        "en": "Facilities",
+        "de": "Einrichtungen"
+      },
+      "type": "amenities",
+      "items": [
+        {
+          "icon": "water",
+          "label": {
+            "it": "Piscina idromassaggio",
+            "en": "Outdoor hot tub",
+            "de": "Whirlpool im Freien"
+          },
+          "detail": {
+            "it": "All'aperto, aperta tutto l'anno. DA_COMPLETARE — orari d'uso.",
+            "en": "Outdoors, open all year. TO BE COMPLETED — hours of use.",
+            "de": "Im Freien, ganzjährig. ZU ERGÄNZEN — Nutzungszeiten."
+          }
+        },
+        {
+          "icon": "flame",
+          "label": {
+            "it": "Area barbecue",
+            "en": "Barbecue area",
+            "de": "Grillplatz"
+          },
+          "detail": {
+            "it": "Aperta tutto l'anno, su richiesta.",
+            "en": "Open all year, on request.",
+            "de": "Ganzjährig, auf Anfrage."
+          }
+        },
+        {
+          "icon": "car",
+          "label": {
+            "it": "Parcheggio privato",
+            "en": "Private parking",
+            "de": "Privatparkplatz"
+          },
+          "detail": {
+            "it": "Gratuito, in loco.",
+            "en": "Free, on site.",
+            "de": "Kostenlos, vor Ort."
+          }
+        },
+        {
+          "icon": "bike",
+          "label": {
+            "it": "Noleggio biciclette",
+            "en": "Bike rental",
+            "de": "Fahrradverleih"
+          },
+          "detail": {
+            "it": "DA_COMPLETARE — modelli disponibili e tariffe.",
+            "en": "TO BE COMPLETED — models and rates.",
+            "de": "ZU ERGÄNZEN — Modelle und Preise."
+          }
+        },
+        {
+          "icon": "shirt",
+          "label": {
+            "it": "Lavanderia",
+            "en": "Laundry",
+            "de": "Wäscheservice"
+          },
+          "detail": {
+            "it": "Lavanderia e lavaggio a secco. DA_COMPLETARE — tempi e costi.",
+            "en": "Laundry and dry cleaning. TO BE COMPLETED — turnaround and cost.",
+            "de": "Wäscherei und chemische Reinigung. ZU ERGÄNZEN — Dauer und Kosten."
+          }
+        },
+        {
+          "icon": "clock",
+          "label": {
+            "it": "Colazione",
+            "en": "Breakfast",
+            "de": "Frühstück"
+          },
+          "detail": {
+            "it": "DA_COMPLETARE — orario e dove viene servita. Dolce e salato; avvisa la sera prima per intolleranze.",
+            "en": "TO BE COMPLETED — time and where it is served.",
+            "de": "ZU ERGÄNZEN — Uhrzeit und Ort."
+          }
+        }
+      ]
+    },
+    {
+      "id": "getting-here",
+      "icon": "pin",
+      "label": {
+        "it": "Come arrivare",
+        "en": "Getting here",
+        "de": "Anfahrt"
+      },
+      "type": "rows",
+      "rows": [
+        {
+          "key": {
+            "it": "Indirizzo",
+            "en": "Address",
+            "de": "Adresse"
+          },
+          "val": {
+            "it": "Vico dei Ferri 7, Finale Ligure",
+            "en": "Vico dei Ferri 7, Finale Ligure",
+            "de": "Vico dei Ferri 7, Finale Ligure"
+          },
+          "big": true
+        },
+        {
+          "key": {
+            "it": "In auto",
+            "en": "By car",
+            "de": "Mit dem Auto"
+          },
+          "val": {
+            "it": "Uscita A10 Finale Ligure, poi salita verso la collina. DA_VERIFICARE — l'ultimo tratto e dove parcheggiare.",
+            "en": "A10 exit Finale Ligure, then up the hill. TO VERIFY — the last stretch and where to park.",
+            "de": "A10-Ausfahrt Finale Ligure, dann bergauf. ZU PRÜFEN — letztes Stück und Parkplatz."
+          }
+        },
+        {
+          "key": {
+            "it": "Dalla stazione",
+            "en": "From the station",
+            "de": "Vom Bahnhof"
+          },
+          "val": {
+            "it": "Finale Ligure Marina, circa 3 km di salita. Meglio taxi o passaggio: avvisa Mario dell'orario di arrivo.",
+            "en": "Finale Ligure Marina, about 3 km uphill. Better by taxi or lift — tell Mario your arrival time.",
+            "de": "Finale Ligure Marina, etwa 3 km bergauf. Besser per Taxi — Ankunftszeit Mario mitteilen."
+          }
+        },
+        {
+          "key": {
+            "it": "Aeroporto",
+            "en": "Airport",
+            "de": "Flughafen"
+          },
+          "val": {
+            "it": "Genova, circa 1 ora in auto. Nizza, circa 2 ore.",
+            "en": "Genoa, about 1 hour by car. Nice, about 2 hours.",
+            "de": "Genua, ca. 1 Stunde. Nizza, ca. 2 Stunden."
+          }
+        }
+      ]
+    },
+    {
+      "id": "transport",
+      "icon": "train",
+      "label": {
+        "it": "Trasporti",
+        "en": "Transport",
+        "de": "Verkehr"
+      },
+      "type": "places",
+      "places": [
+        {
+          "name": "Stazione Finale Ligure Marina",
+          "coords": [
+            44.1690486,
+            8.3405867
+          ],
+          "walkMin": 40,
+          "driveMin": 8,
+          "photo": null,
+          "note": {
+            "it": "Linea Genova–Ventimiglia. Regionali frequenti verso Savona e Albenga.",
+            "en": "Genoa–Ventimiglia line. Frequent regional trains to Savona and Albenga.",
+            "de": "Strecke Genua–Ventimiglia. Häufige Regionalzüge nach Savona und Albenga."
+          }
+        },
+        {
+          "name": "DA_COMPLETARE — taxi",
+          "coords": null,
+          "walkMin": null,
+          "driveMin": null,
+          "phone": null,
+          "photo": null,
+          "note": {
+            "it": "Il numero del taxi di fiducia di Mario. È l'informazione più richiesta la sera.",
+            "en": "Mario's trusted taxi number — the most requested piece of information at night.",
+            "de": "Marios Taxinummer — die am häufigsten nachgefragte Information am Abend."
+          }
+        },
+        {
+          "name": "DA_COMPLETARE — fermata bus",
+          "coords": null,
+          "walkMin": null,
+          "driveMin": null,
+          "photo": null,
+          "note": {
+            "it": "La fermata TPL più vicina alla casa e la linea che scende in Marina.",
+            "en": "The nearest bus stop and the line down to the seafront.",
+            "de": "Nächste Bushaltestelle und Linie hinunter zur Promenade."
+          }
+        }
+      ]
+    },
+    {
+      "id": "restaurants",
+      "icon": "cutlery",
+      "label": {
+        "it": "Ristoranti",
+        "en": "Restaurants",
+        "de": "Restaurants"
+      },
+      "type": "places",
+      "intro": {
+        "it": "I posti dove Mario manda gli ospiti. Telefona sempre prima: i giorni di chiusura cambiano con la stagione.",
+        "en": "Where Mario sends his guests. Always call ahead — closing days change with the season.",
+        "de": "Wohin Mario seine Gäste schickt. Immer vorher anrufen — Ruhetage ändern sich saisonal."
+      },
+      "places": [
+        {
+          "name": "Trattoria Cucco",
+          "coords": [
+            44.18247,
+            8.33754
+          ],
+          "walkMin": 26,
+          "driveMin": 5,
+          "phone": "+390194508541",
+          "closed": {
+            "it": "mercoledì",
+            "en": "Wednesday",
+            "de": "Mittwoch"
+          },
+          "photo": null,
+          "note": {
+            "it": "DA_COMPLETARE — il commento di Mario. È il più vicino a casa, sempre in collina.",
+            "en": "TO BE COMPLETED — Mario's note. The closest one, also on the hillside.",
+            "de": "ZU ERGÄNZEN — Marios Hinweis. Das nächstgelegene, ebenfalls am Hang."
+          }
+        },
+        {
+          "name": "Osteria Grotesque",
+          "coords": [
+            44.1691305,
+            8.3436961
+          ],
+          "walkMin": 40,
+          "driveMin": 8,
+          "phone": "+393463266399",
+          "closed": null,
+          "photo": null,
+          "note": {
+            "it": "DA_COMPLETARE — in centro, pochi coperti, meglio prenotare.",
+            "en": "TO BE COMPLETED — in town, few tables, better to book.",
+            "de": "ZU ERGÄNZEN — im Zentrum, wenige Plätze, besser reservieren."
+          }
+        },
+        {
+          "name": "Antica Osteria (Perti Alto)",
+          "coords": [
+            44.1827217,
+            8.3195176
+          ],
+          "walkMin": 50,
+          "driveMin": 10,
+          "phone": "+393487562537",
+          "closed": {
+            "it": "martedì e mercoledì",
+            "en": "Tuesday and Wednesday",
+            "de": "Dienstag und Mittwoch"
+          },
+          "photo": null,
+          "note": {
+            "it": "DA_COMPLETARE — terrazza panoramica sopra Finalborgo.",
+            "en": "TO BE COMPLETED — panoramic terrace above Finalborgo.",
+            "de": "ZU ERGÄNZEN — Panoramaterrasse über Finalborgo."
+          }
+        },
+        {
+          "name": "Alla Vecchia Maniera",
+          "coords": [
+            44.170052,
+            8.3461098
+          ],
+          "walkMin": 40,
+          "driveMin": 8,
+          "phone": "+39019692562",
+          "closed": null,
+          "photo": null,
+          "note": {
+            "it": "DA_COMPLETARE — pesce, in Via Roma.",
+            "en": "TO BE COMPLETED — seafood, on Via Roma.",
+            "de": "ZU ERGÄNZEN — Fisch, in der Via Roma."
+          }
+        }
+      ]
+    },
+    {
+      "id": "bars",
+      "icon": "glass",
+      "label": {
+        "it": "Bar e aperitivi",
+        "en": "Bars",
+        "de": "Bars"
+      },
+      "type": "places",
+      "places": [
+        {
+          "name": "DA_COMPLETARE",
+          "coords": null,
+          "walkMin": null,
+          "driveMin": null,
+          "photo": null,
+          "note": {
+            "it": "Due o tre posti per l'aperitivo, scelti da Mario. Uno sul mare e uno a Finalborgo coprono quasi tutte le richieste.",
+            "en": "Two or three aperitivo spots chosen by Mario — one by the sea and one in Finalborgo cover most requests.",
+            "de": "Zwei oder drei Aperitif-Adressen von Mario — eine am Meer, eine in Finalborgo."
+          }
+        }
+      ]
+    },
+    {
+      "id": "shopping",
+      "icon": "cart",
+      "label": {
+        "it": "Spesa",
+        "en": "Groceries",
+        "de": "Einkaufen"
+      },
+      "type": "places",
+      "intro": {
+        "it": "Dopo il wifi, è la domanda più frequente.",
+        "en": "After the Wi-Fi, this is the most frequent question.",
+        "de": "Nach dem WLAN die häufigste Frage."
+      },
+      "places": [
+        {
+          "name": "DA_COMPLETARE — supermercato più vicino",
+          "coords": null,
+          "walkMin": null,
+          "driveMin": null,
+          "photo": null,
+          "note": {
+            "it": "Nome, orario e se è aperto la domenica. Aggiungi anche il forno e il mercato settimanale.",
+            "en": "Name, hours, and whether it opens on Sunday. Add the bakery and the weekly market too.",
+            "de": "Name, Öffnungszeiten, sonntags geöffnet? Auch Bäckerei und Wochenmarkt ergänzen."
+          }
+        }
+      ]
+    },
+    {
+      "id": "sea",
+      "icon": "wave",
+      "label": {
+        "it": "Mare",
+        "en": "The sea",
+        "de": "Das Meer"
+      },
+      "type": "places",
+      "places": [
+        {
+          "name": "Spiaggia libera attrezzata",
+          "coords": [
+            44.1674163,
+            8.3423057
+          ],
+          "walkMin": 43,
+          "driveMin": 8,
+          "photo": null,
+          "note": {
+            "it": "Sul lungomare Migliorini. Libera, con servizi.",
+            "en": "On the Migliorini seafront. Free access, with facilities.",
+            "de": "An der Promenade Migliorini. Frei zugänglich, mit Einrichtungen."
+          }
+        },
+        {
+          "name": "Bagni Vittoria",
+          "coords": [
+            44.168276,
+            8.3438705
+          ],
+          "walkMin": 41,
+          "driveMin": 8,
+          "phone": "+393802030500",
+          "photo": null,
+          "note": {
+            "it": "Stabilimento con noleggio SUP e kayak. In alta stagione si prenota con qualche giorno di anticipo.",
+            "en": "Beach club with SUP and kayak rental. In high season, book a few days ahead.",
+            "de": "Strandbad mit SUP- und Kajakverleih. In der Hochsaison einige Tage vorher buchen."
+          }
+        },
+        {
+          "name": "DA_COMPLETARE — la baia di Mario",
+          "coords": null,
+          "walkMin": null,
+          "driveMin": null,
+          "photo": null,
+          "note": {
+            "it": "Il posto meno affollato che conosce lui. È questo che un ospite non trova su Google.",
+            "en": "The least crowded spot he knows — the one a guest can't find on Google.",
+            "de": "Die ruhigste Stelle, die er kennt — die man bei Google nicht findet."
+          }
+        }
+      ]
+    },
+    {
+      "id": "outdoor",
+      "icon": "bike",
+      "label": {
+        "it": "Bici e sentieri",
+        "en": "Bikes & trails",
+        "de": "Rad & Wege"
+      },
+      "type": "places",
+      "intro": {
+        "it": "Finale è una delle capitali europee della mountain bike. Mario noleggia le bici: i percorsi partono da qui.",
+        "en": "Finale is one of Europe's mountain-biking capitals. Mario rents bikes, and the trails start from the house.",
+        "de": "Finale ist eine der europäischen MTB-Hochburgen. Mario vermietet Räder; die Touren starten am Haus."
+      },
+      "places": [
+        {
+          "name": "DA_COMPLETARE — il giro consigliato",
+          "coords": null,
+          "walkMin": null,
+          "driveMin": null,
+          "photo": null,
+          "note": {
+            "it": "Un percorso facile e uno impegnativo che partono dalla casa, con dislivello e durata.",
+            "en": "One easy and one demanding route starting from the house, with elevation and duration.",
+            "de": "Eine leichte und eine anspruchsvolle Route ab Haus, mit Höhenmetern und Dauer."
+          }
+        },
+        {
+          "name": "DA_COMPLETARE — sentiero a piedi",
+          "coords": null,
+          "walkMin": null,
+          "driveMin": null,
+          "photo": null,
+          "note": {
+            "it": "La camminata più bella raggiungibile senza auto.",
+            "en": "The best walk you can reach without a car.",
+            "de": "Der schönste Spaziergang ohne Auto."
+          }
+        }
+      ]
+    },
+    {
+      "id": "see",
+      "icon": "camera",
+      "label": {
+        "it": "Da vedere",
+        "en": "Worth seeing",
+        "de": "Sehenswert"
+      },
+      "type": "places",
+      "places": [
+        {
+          "name": "Finalborgo",
+          "coords": [
+            44.1743048,
+            8.3294959
+          ],
+          "walkMin": 43,
+          "driveMin": 8,
+          "photo": null,
+          "note": {
+            "it": "Borgo medievale cinto da mura, tra i Borghi più belli d'Italia. Bello la sera, quando i pullman sono andati via.",
+            "en": "A walled medieval village, among Italy's finest. Best in the evening, once the coaches have left.",
+            "de": "Mittelalterliches Städtchen mit Mauerring. Am schönsten abends, wenn die Busse weg sind."
+          }
+        },
+        {
+          "name": "DA_COMPLETARE — Varigotti",
+          "coords": null,
+          "walkMin": null,
+          "driveMin": null,
+          "photo": null,
+          "note": {
+            "it": "Le case colorate sul mare, pochi minuti in auto verso levante.",
+            "en": "The coloured houses on the water, a few minutes east by car.",
+            "de": "Die bunten Häuser am Wasser, wenige Autominuten östlich."
+          }
+        }
+      ]
+    },
+    {
+      "id": "checkout",
+      "icon": "suitcase",
+      "label": {
+        "it": "Check-out",
+        "en": "Check-out",
+        "de": "Check-out"
+      },
+      "type": "rows",
+      "rows": [
+        {
+          "key": {
+            "it": "Orario",
+            "en": "Time",
+            "de": "Uhrzeit"
+          },
+          "val": {
+            "it": "Entro le 10:00",
+            "en": "By 10:00",
+            "de": "Bis 10:00"
+          },
+          "big": true
+        },
+        {
+          "key": {
+            "it": "Chiavi",
+            "en": "Keys",
+            "de": "Schlüssel"
+          },
+          "val": {
+            "it": "DA_COMPLETARE — dove lasciarle.",
+            "en": "TO BE COMPLETED",
+            "de": "ZU ERGÄNZEN"
+          }
+        },
+        {
+          "key": {
+            "it": "Bagagli",
+            "en": "Luggage",
+            "de": "Gepäck"
+          },
+          "val": {
+            "it": "DA_COMPLETARE — si possono lasciare dopo il check-out?",
+            "en": "TO BE COMPLETED — can bags be left after check-out?",
+            "de": "ZU ERGÄNZEN — Gepäckaufbewahrung nach dem Check-out?"
+          }
+        },
+        {
+          "key": {
+            "it": "Prima di andare",
+            "en": "Before you go",
+            "de": "Vor der Abreise"
+          },
+          "val": {
+            "it": "Se ti sei trovato bene, una recensione aiuta più di quanto immagini una casa piccola come questa.",
+            "en": "If you enjoyed your stay, a review helps a small house like this more than you'd think.",
+            "de": "Wenn es Ihnen gefallen hat: Eine Bewertung hilft einem kleinen Haus wie diesem sehr."
+          }
+        }
+      ]
+    },
+    {
+      "id": "emergency",
+      "icon": "cross",
+      "label": {
+        "it": "Emergenze",
+        "en": "Emergency",
+        "de": "Notfall"
+      },
+      "type": "emergency",
+      "generic": {
+        "number": "112",
+        "label": {
+          "it": "Numero unico di emergenza",
+          "en": "Single emergency number",
+          "de": "Einheitlicher Notruf"
+        }
+      },
+      "contacts": [
+        {
+          "name": "Mario",
+          "phone": "+393534737296",
+          "detail": {
+            "it": "Il tuo host",
+            "en": "Your host",
+            "de": "Ihr Gastgeber"
+          }
+        },
+        {
+          "name": "Farmacia della Marina",
+          "phone": "+390196926 70",
+          "detail": {
+            "it": "8:00–20:00 · Via Pertica 61",
+            "en": "8:00–20:00 · Via Pertica 61",
+            "de": "8:00–20:00 · Via Pertica 61"
+          }
+        },
+        {
+          "name": "Farmacia Richeri",
+          "phone": "+390196017 03",
+          "detail": {
+            "it": "Corso Europa 21 · distributore automatico",
+            "en": "Corso Europa 21 · vending machine",
+            "de": "Corso Europa 21 · Automat"
+          }
+        },
+        {
+          "name": "DA_COMPLETARE — guardia medica",
+          "phone": null,
+          "detail": {
+            "it": "Il numero notturno e festivo della zona.",
+            "en": "The local out-of-hours doctor number.",
+            "de": "Ärztlicher Notdienst der Region."
+          }
+        }
+      ]
+    },
+    {
+      "id": "contacts",
+      "icon": "phone",
+      "label": {
+        "it": "Contatti",
+        "en": "Contacts",
+        "de": "Kontakt"
+      },
+      "type": "rows",
+      "rows": [
+        {
+          "key": {
+            "it": "Mario",
+            "en": "Mario",
+            "de": "Mario"
+          },
+          "val": {
+            "it": "+39 353 473 7296",
+            "en": "+39 353 473 7296",
+            "de": "+39 353 473 7296"
+          },
+          "big": true
+        },
+        {
+          "key": {
+            "it": "Lingue",
+            "en": "Languages",
+            "de": "Sprachen"
+          },
+          "val": {
+            "it": "Italiano, inglese, tedesco.",
+            "en": "Italian, English, German.",
+            "de": "Italienisch, Englisch, Deutsch."
+          }
+        },
+        {
+          "key": {
+            "it": "Sito",
+            "en": "Website",
+            "de": "Website"
+          },
+          "val": {
+            "it": "beblacrema.it",
+            "en": "beblacrema.it",
+            "de": "beblacrema.it"
+          }
+        }
+      ]
+    }
+  ]
+}
