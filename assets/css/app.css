@@ -1,18 +1,28 @@
 /* ==========================================================================
    B&B Lacrêma — welcome app
-   Colour sampled from the property logo. Contrast is a function here, not a
-   preference: a tired guest reads this at night with the screen dimmed.
+
+   Two sources feed the palette: the logo (#000000 / #FBBA16) and the entrance
+   photograph, sampled directly — limestone, walnut, foliage, shadow.
+   The arch of the front door becomes the shape of every tile.
    ========================================================================== */
 
 :root {
-  --ink:        #000000;
-  --gold:       #FBBA16;
-  --gold-deep:  #A67B0E;
-  --paper:      #FFFFFF;
-  --stone:      #EDEEE9;
-  --stone-deep: #E0E2DA;
-  --olive:      #55604A;
-  --olive-pale: #A3AC99;
+  /* From the logo */
+  --ink:       #000000;
+  --gold:      #FBBA16;
+  --gold-deep: #A67B0E;
+
+  /* Sampled from the entrance photograph */
+  --bark:      #241F15;
+  --wood:      #755544;
+  --limestone: #AFA089;
+  --stone:     #E8E3D9;
+  --stone-hi:  #F3F0EA;
+  --line:      #CFC7B7;
+  --foliage:   #35412F;
+  --muted:     #5A5346;
+
+  --paper:     #FFFFFF;
 
   --display: "Bodoni Moda", "Didot", "Bodoni MT", Georgia, serif;
   --ui: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -70,10 +80,8 @@ button {
   border-radius: 2px;
 }
 
-.band--ink :focus-visible { outline-color: var(--gold); }
-
 /* --------------------------------------------------------------------------
-   Masthead
+   Masthead — section pages only; on the home the logo lives in the photograph
    -------------------------------------------------------------------------- */
 
 .masthead {
@@ -87,8 +95,14 @@ button {
   margin-inline: auto;
 }
 
+body.is-home .masthead { display: none; }
+
 .masthead__home { padding: 0; }
-.masthead__logo { width: 152px; height: auto; }
+.masthead__logo { width: 148px; height: auto; }
+
+/* --------------------------------------------------------------------------
+   Language switcher
+   -------------------------------------------------------------------------- */
 
 .langs { display: flex; gap: var(--s-1); }
 
@@ -96,13 +110,107 @@ button {
   padding: var(--s-1) var(--s-3);
   font-size: var(--t-xs);
   font-weight: 600;
-  color: var(--olive);
+  letter-spacing: 0.01em;
+  color: var(--muted);
   border-radius: 999px;
+  transition: background 0.15s, color 0.15s;
 }
 
-.langs button[aria-pressed="true"] {
-  background: var(--ink);
+.langs button[aria-pressed="true"] { background: var(--ink); color: var(--gold); }
+
+/* On the photograph the same control has to read against a moving background */
+.langs--onphoto button {
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(36, 31, 21, 0.42);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.langs--onphoto button[aria-pressed="true"] {
+  background: var(--gold);
+  color: var(--bark);
+  border-color: var(--gold);
+}
+
+/* --------------------------------------------------------------------------
+   Hero — the doorway
+   -------------------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 78svh;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--s-5) + env(safe-area-inset-top, 0px)) var(--s-5) var(--s-7);
+  background-color: var(--bark);
+  background-position: center 42%;
+  background-size: cover;
+  color: var(--paper);
+  text-align: center;
+}
+
+/* Warm scrim: dark at the top so the language pills hold, dark at the foot so
+   the logo and the greeting hold. The middle stays open on the doorway. */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(36, 31, 21, 0.58) 0%,
+      rgba(36, 31, 21, 0.12) 24%,
+      rgba(36, 31, 21, 0.42) 52%,
+      rgba(36, 31, 21, 0.80) 72%,
+      rgba(36, 31, 21, 0.94) 100%
+    );
+}
+
+.hero__top {
+  display: flex;
+  justify-content: center;
+  margin-bottom: auto;
+}
+
+.hero__mark { margin: var(--s-7) 0 0; }
+
+.hero__logo {
+  width: min(74vw, 20rem);
+  height: auto;
+  margin-inline: auto;
+}
+
+.hero__tagline {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: var(--t-lg);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: var(--s-5) auto 0;
+  max-width: 24ch;
+  text-shadow: 0 1px 14px rgba(36, 31, 21, 0.6);
+}
+
+.hero__from {
+  margin: var(--s-3) auto 0;
+  max-width: 34ch;
+  font-size: var(--t-sm);
+  color: rgba(255, 255, 255, 0.86);
+  text-shadow: 0 1px 12px rgba(36, 31, 21, 0.7);
+}
+
+.hero__call {
+  display: inline-block;
+  margin-top: var(--s-5);
+  padding-bottom: 2px;
+  font-weight: 600;
+  font-size: var(--t-sm);
   color: var(--gold);
+  text-decoration: none;
+  border-bottom: 2px solid var(--gold);
 }
 
 /* --------------------------------------------------------------------------
@@ -113,7 +221,7 @@ button {
 .band > * { max-width: var(--column); margin-inline: auto; }
 
 .band--stone { background: var(--stone); }
-.band--ink   { background: var(--ink); color: var(--paper); }
+.band--ink   { background: var(--bark); color: var(--paper); }
 
 .panel > .band:first-child { padding-top: var(--s-4); }
 
@@ -126,25 +234,79 @@ button {
   margin: 0 0 var(--s-5);
 }
 
-.band__title--section {
-  display: flex;
-  align-items: center;
-  gap: var(--s-3);
-}
+.band__title--center { text-align: center; margin-bottom: var(--s-6); }
+
+.band__title--section { display: flex; align-items: center; gap: var(--s-3); }
 
 .band__icon { flex: none; color: var(--gold-deep); display: flex; }
 .band--ink .band__icon { color: var(--gold); }
 
-.prose {
-  max-width: var(--measure);
-  margin: 0 0 var(--s-5);
-}
+.prose { max-width: var(--measure); margin: 0 0 var(--s-5); }
 
 .disclaimer {
   margin: var(--s-5) 0 0;
   font-size: var(--t-sm);
-  color: var(--olive);
+  color: var(--muted);
   max-width: var(--measure);
+}
+
+/* --------------------------------------------------------------------------
+   The launcher — each tile is a small arched doorway
+   -------------------------------------------------------------------------- */
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tile {
+  width: 100%;
+  aspect-ratio: 1 / 1.1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-4);
+  padding: 10% var(--s-2) var(--s-4);
+  background: var(--stone-hi);
+  border: 1px solid var(--line);
+  border-radius: 999px 999px 5px 5px;
+  text-align: center;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.tile__icon {
+  color: var(--wood);
+  display: flex;
+  transition: color 0.18s ease;
+}
+
+.tile__label {
+  font-size: var(--t-xs);
+  font-weight: 600;
+  line-height: 1.2;
+  hyphens: auto;
+}
+
+.tile:hover,
+.tile:focus-visible {
+  background: var(--bark);
+  border-color: var(--bark);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+
+.tile:hover .tile__icon,
+.tile:focus-visible .tile__icon { color: var(--gold); }
+
+.tile:active { transform: none; }
+
+@media (min-width: 30rem) {
+  .tiles { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* --------------------------------------------------------------------------
@@ -159,47 +321,28 @@ button {
   padding: var(--s-2) var(--s-3) var(--s-2) var(--s-2);
   font-size: var(--t-sm);
   font-weight: 600;
-  color: var(--olive);
+  color: var(--muted);
   border-radius: 999px;
 }
 
 .back:hover { background: var(--stone); color: var(--ink); }
-.band--ink .back { color: var(--olive-pale); }
-.band--ink .back:hover { background: #1A1A1A; color: var(--paper); }
+.band--ink .back { color: var(--limestone); }
+.band--ink .back:hover { background: #332C1F; color: var(--paper); }
 
 /* --------------------------------------------------------------------------
-   Hero
+   Wi-Fi card — now inside its own section, not on the home
    -------------------------------------------------------------------------- */
 
-.hero { padding-top: var(--s-3); padding-bottom: var(--s-6); }
-
-.hero__greeting {
-  font-family: var(--display);
-  font-size: var(--t-2xl);
-  font-weight: 500;
-  line-height: 1.12;
-  letter-spacing: -0.015em;
-  margin: 0 0 var(--s-3);
-  max-width: 22ch;
-}
-
-.hero__from {
-  margin: 0 0 var(--s-5);
-  max-width: var(--measure);
-  color: var(--olive);
-}
-
-/* The Wi-Fi card is the one loud element. Nothing else competes with it. */
 .wifi {
   background: var(--gold);
-  color: var(--ink);
+  color: var(--bark);
   padding: var(--s-5);
   border-radius: 4px;
 }
 
 .wifi__label { font-size: var(--t-sm); font-weight: 600; margin: 0 0 var(--s-3); }
 .wifi__row + .wifi__row { margin-top: var(--s-4); }
-.wifi__key { font-size: var(--t-xs); color: rgba(0,0,0,0.65); margin: 0 0 var(--s-1); }
+.wifi__key { font-size: var(--t-xs); color: rgba(36, 31, 21, 0.7); margin: 0 0 var(--s-1); }
 
 .wifi__value {
   display: flex;
@@ -214,7 +357,7 @@ button {
 
 .wifi__copy {
   flex: none;
-  border: 1.5px solid var(--ink);
+  border: 1.5px solid var(--bark);
   border-radius: 3px;
   padding: var(--s-2) var(--s-3);
   font-family: var(--ui);
@@ -224,82 +367,9 @@ button {
 }
 
 .wifi__copy:hover,
-.wifi__copy[data-copied="true"] { background: var(--ink); color: var(--gold); }
+.wifi__copy[data-copied="true"] { background: var(--bark); color: var(--gold); }
 
-.wifi__note { margin: var(--s-4) 0 0; font-size: var(--t-sm); color: rgba(0,0,0,0.72); }
-
-.quick {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--s-3);
-  margin-top: var(--s-5);
-}
-
-.quick a {
-  display: block;
-  padding: var(--s-4);
-  border: 1.5px solid var(--ink);
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.15s, color 0.15s;
-}
-
-.quick a span { display: block; font-weight: 400; font-size: var(--t-sm); color: var(--olive); }
-.quick a:hover { background: var(--ink); color: var(--gold); }
-.quick a:hover span { color: var(--gold); }
-
-/* --------------------------------------------------------------------------
-   Launcher grid
-   -------------------------------------------------------------------------- */
-
-.tiles {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--s-3);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.tile {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--s-2);
-  padding: var(--s-2);
-  background: var(--paper);
-  border: 1px solid var(--stone-deep);
-  border-radius: 6px;
-  text-align: center;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
-}
-
-.tile__icon { color: var(--gold-deep); display: flex; }
-
-.tile__label {
-  font-size: var(--t-xs);
-  font-weight: 600;
-  line-height: 1.25;
-  hyphens: auto;
-}
-
-.tile:hover,
-.tile:focus-visible {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--paper);
-}
-
-.tile:hover .tile__icon,
-.tile:focus-visible .tile__icon { color: var(--gold); }
-
-@media (min-width: 30rem) {
-  .tiles { grid-template-columns: repeat(4, 1fr); }
-}
+.wifi__note { margin: var(--s-4) 0 0; font-size: var(--t-sm); color: rgba(36, 31, 21, 0.78); }
 
 /* --------------------------------------------------------------------------
    Definition rows
@@ -312,14 +382,13 @@ button {
   grid-template-columns: 9rem 1fr;
   gap: var(--s-4);
   padding: var(--s-4) 0;
-  border-top: 1px solid rgba(0,0,0,0.15);
+  border-top: 1px solid var(--line);
 }
 
-.row:last-child { border-bottom: 1px solid rgba(0,0,0,0.15); }
+.row:last-child { border-bottom: 1px solid var(--line); }
 
 .row__key { font-weight: 600; font-size: var(--t-sm); margin: 0; padding-top: 0.15em; }
 .row__val { margin: 0; }
-
 .row__val--big { font-family: var(--display); font-size: var(--t-lg); line-height: 1.2; }
 
 @media (max-width: 26rem) {
@@ -336,14 +405,14 @@ button {
   display: flex;
   gap: var(--s-4);
   padding: var(--s-4) 0;
-  border-top: 1px solid rgba(0,0,0,0.15);
+  border-top: 1px solid var(--line);
 }
 
-.amenity:last-child { border-bottom: 1px solid rgba(0,0,0,0.15); }
+.amenity:last-child { border-bottom: 1px solid var(--line); }
 
-.amenity__icon { flex: none; color: var(--gold-deep); padding-top: 0.15em; display: flex; }
+.amenity__icon { flex: none; color: var(--wood); padding-top: 0.15em; display: flex; }
 .amenity h3 { margin: 0 0 var(--s-1); font-size: var(--t-base); font-weight: 600; }
-.amenity p { margin: 0; font-size: var(--t-sm); color: var(--olive); max-width: var(--measure); }
+.amenity p { margin: 0; font-size: var(--t-sm); color: var(--muted); max-width: var(--measure); }
 
 /* --------------------------------------------------------------------------
    Places
@@ -356,16 +425,17 @@ button {
   grid-template-columns: 6.5rem 1fr;
   gap: var(--s-4);
   padding: var(--s-5) 0;
-  border-top: 1px solid rgba(0,0,0,0.15);
+  border-top: 1px solid var(--line);
 }
 
-.place:last-child { border-bottom: 1px solid rgba(0,0,0,0.15); }
+.place:last-child { border-bottom: 1px solid var(--line); }
 
+/* The arch again, at list scale */
 .place__photo {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 999px 999px 4px 4px;
   background: var(--stone);
 }
 
@@ -376,8 +446,8 @@ button {
   justify-content: center;
   gap: var(--s-1);
   padding: var(--s-2);
-  border: 1px dashed var(--stone-deep);
-  color: var(--olive-pale);
+  border: 1px dashed var(--line);
+  color: var(--limestone);
   font-size: 0.625rem;
   line-height: 1.2;
   text-align: center;
@@ -385,14 +455,8 @@ button {
 
 .place__name { font-family: var(--display); font-size: var(--t-md); font-weight: 500; margin: 0; }
 
-.place__times {
-  margin: var(--s-1) 0 0;
-  font-size: var(--t-sm);
-  font-weight: 600;
-  color: var(--gold-deep);
-}
-
-.place__note { margin: var(--s-2) 0 0; color: var(--olive); max-width: var(--measure); }
+.place__times { margin: var(--s-1) 0 0; font-size: var(--t-sm); font-weight: 600; color: var(--gold-deep); }
+.place__note { margin: var(--s-2) 0 0; color: var(--muted); max-width: var(--measure); }
 .place__closed { margin: var(--s-2) 0 0; font-size: var(--t-sm); font-weight: 600; }
 
 .place__actions { display: flex; gap: var(--s-4); margin-top: var(--s-3); }
@@ -419,7 +483,7 @@ button {
   justify-content: space-between;
   gap: var(--s-4);
   background: var(--gold);
-  color: var(--ink);
+  color: var(--bark);
   padding: var(--s-5);
   border-radius: 4px;
   text-decoration: none;
@@ -437,13 +501,13 @@ button {
   justify-content: space-between;
   gap: var(--s-4);
   padding: var(--s-4) 0;
-  border-top: 1px solid rgba(255,255,255,0.22);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
 }
 
-.contact:last-child { border-bottom: 1px solid rgba(255,255,255,0.22); }
+.contact:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.22); }
 
 .contact__name { margin: 0; font-weight: 600; }
-.contact__detail { margin: var(--s-1) 0 0; font-size: var(--t-sm); color: var(--olive-pale); }
+.contact__detail { margin: var(--s-1) 0 0; font-size: var(--t-sm); color: var(--limestone); }
 
 .contact a {
   flex: none;
@@ -460,18 +524,15 @@ button {
 .todo {
   display: inline-block;
   background: repeating-linear-gradient(-45deg,
-    var(--stone), var(--stone) 6px, var(--stone-deep) 6px, var(--stone-deep) 12px);
-  color: var(--olive);
+    var(--stone), var(--stone) 6px, var(--line) 6px, var(--line) 12px);
+  color: var(--muted);
   padding: 0 var(--s-2);
   border-radius: 2px;
   font-size: 0.9em;
   font-style: italic;
 }
 
-.band--ink .todo {
-  background: #1E1E1E;
-  color: var(--olive-pale);
-}
+.band--ink .todo { background: #332C1F; color: var(--limestone); }
 
 /* --------------------------------------------------------------------------
    Colophon
@@ -482,29 +543,32 @@ button {
   max-width: var(--column);
   margin-inline: auto;
   font-size: var(--t-xs);
-  color: var(--olive);
+  color: var(--muted);
+  text-align: center;
 }
 
 .colophon a { color: var(--gold-deep); }
 
 /* --------------------------------------------------------------------------
-   Motion — one entrance on load, nothing else
+   Motion — one entrance, then stillness
    -------------------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero__greeting, .hero__from, .wifi {
-    animation: rise 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  .hero__logo, .hero__tagline, .hero__from, .hero__call {
+    animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) both;
   }
-  .hero__from { animation-delay: 0.07s; }
-  .wifi { animation-delay: 0.14s; }
+  .hero__tagline { animation-delay: 0.1s; }
+  .hero__from    { animation-delay: 0.17s; }
+  .hero__call    { animation-delay: 0.24s; }
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(0.5rem); }
+  from { opacity: 0; transform: translateY(0.75rem); }
   to   { opacity: 1; transform: none; }
 }
 
 @media (min-width: 48rem) {
-  :root { --t-2xl: 2.5rem; --t-xl: 2rem; }
+  :root { --t-2xl: 2.5rem; --t-xl: 2rem; --t-lg: 1.625rem; }
   .band { padding-inline: var(--s-6); }
+  .hero { min-height: 70svh; }
 }

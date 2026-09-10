@@ -1,5 +1,5 @@
 /* Offline-first shell. Bump CACHE when you change any listed file. */
-const CACHE = "lacrema-v2";
+const CACHE = "lacrema-v3";
 
 const SHELL = [
   "./",
@@ -10,6 +10,8 @@ const SHELL = [
   "assets/js/i18n.js",
   "assets/js/icons.js",
   "assets/img/logo.png",
+  "assets/img/logo-light.png",
+  "assets/img/entrance.jpg",
   "config/lacrema.json"
 ];
 

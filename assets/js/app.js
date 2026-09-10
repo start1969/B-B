@@ -82,6 +82,19 @@ function wifiCard() {
     </div>`;
 }
 
+function langSwitcher(extraClass = "") {
+  return `<div class="langs ${extraClass}" role="group" aria-label="${esc(t.langLabel)}">
+    ${config.property.languages
+      .map(
+        (l) =>
+          `<button data-lang="${l}" aria-pressed="${l === lang}" lang="${l}">${esc(
+            LANGUAGE_NAMES[l] ?? l.toUpperCase()
+          )}</button>`
+      )
+      .join("")}
+  </div>`;
+}
+
 function renderHome() {
   const { property, host, sections } = config;
 
@@ -97,22 +110,25 @@ function renderHome() {
     )
     .join("");
 
+  const photo = property.photo
+    ? ` style="background-image:url('${esc(property.photo)}')"`
+    : "";
+
   return `
-    <section class="band hero">
-      <div>
-        <h1 class="hero__greeting">${val(property.tagline)}</h1>
+    <section class="hero"${photo}>
+      <div class="hero__top">${langSwitcher("langs--onphoto")}</div>
+      <div class="hero__mark">
+        <img class="hero__logo" src="${esc(property.logoLight ?? property.logo)}"
+             alt="${esc(property.name)}">
+        <p class="hero__tagline">${val(property.tagline)}</p>
         <p class="hero__from">${val(host.greeting)}</p>
-        ${wifiCard()}
-        <div class="quick">
-          <a href="${tel(host.phone)}">${esc(t.call)}<span>${esc(host.phoneDisplay)}</span></a>
-          <a href="${map(property.coords)}" target="_blank" rel="noopener">${esc(t.directions)}<span>${esc(t.directionsSub)}</span></a>
-        </div>
+        <a class="hero__call" href="${tel(host.phone)}">${esc(t.call)}</a>
       </div>
     </section>
 
     <section class="band band--stone">
       <div>
-        <h2 class="band__title">${esc(t.sections)}</h2>
+        <h2 class="band__title band__title--center">${esc(t.sections)}</h2>
         <ul class="tiles">${tiles}</ul>
       </div>
     </section>`;
@@ -249,16 +265,7 @@ function renderShell() {
     <button class="masthead__home" data-go="home" aria-label="${esc(t.home)}">
       <img class="masthead__logo" src="${esc(property.logo)}" alt="${esc(property.name)}">
     </button>
-    <div class="langs" role="group" aria-label="${esc(t.langLabel)}">
-      ${property.languages
-        .map(
-          (l) =>
-            `<button data-lang="${l}" aria-pressed="${l === lang}" lang="${l}">${esc(
-              LANGUAGE_NAMES[l] ?? l.toUpperCase()
-            )}</button>`
-        )
-        .join("")}
-    </div>`;
+    ${langSwitcher()}`;
 
   $("#colophon").innerHTML = `
     ${esc(t.updated)} ${esc(config.updated)} ·
@@ -268,6 +275,7 @@ function renderShell() {
 }
 
 function renderRoute() {
+  document.body.classList.toggle("is-home", route === "home");
   $("#panel").innerHTML = route === "home" ? renderHome() : renderSection(route);
   window.scrollTo(0, 0);
 }

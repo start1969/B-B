@@ -9,13 +9,9 @@ designed so that another property can fork it and change one JSON file.
 
 ## How it works for a guest
 
-The home screen shows, in this order: the host's greeting, the Wi-Fi password in
-full size, a tap-to-call and a tap-for-directions, and then a grid of fifteen
-sections. Tap one, read it, tap home.
-
-The Wi-Fi comes before everything else on purpose. Most welcome guides open with
-a photo gallery; a guest arriving at eleven at night with a suitcase wants to
-connect and find out when breakfast is. The photographs can wait.
+The home screen is the front door: a full-height photograph of the entrance, the
+logo centred over it, the greeting, and one discreet tap-to-call. Below sits a
+grid of fifteen arched tiles. Tap one, read it, tap home.
 
 Interface and content are in Italian, English and German, chosen from the phone's
 language and overridable by the guest. Languages are named in their own language
@@ -59,6 +55,9 @@ how it renders:
 Icons come from `assets/js/icons.js`, drawn for this project at a hairline weight
 that matches the didone in the logo. Add one there and reference it by name.
 
+`property.photo` is the home-screen image and `property.logoLight` the logo used
+over it. Drop either and the home falls back to a plain dark panel.
+
 ### Distances
 
 Places carry `walkMin` and `driveMin`, not kilometres. "1.5 km" tells a guest
@@ -85,7 +84,8 @@ Outstanding for Lacrêma, in order of value:
 5. The nearest supermarket, the bakery, the market day.
 6. The out-of-hours doctor number.
 7. Quiet hours, smoking policy, where to leave the keys at check-out.
-8. Photographs of the recommended places — real ones, not stock.
+8. Photographs of the recommended places — real ones, not stock. Set the `photo`
+   field on each place; until then the slot shows a marked placeholder.
 
 ## Run it locally
 
@@ -110,19 +110,27 @@ the service worker fetches the config from the network first.
 
 ## Design
 
-Colours come from the property's own logo: `#000000` and `#FBBA16`, sampled from
-the file rather than guessed. `#A67B0E` is the same gold darkened enough to pass
-contrast as text on white. `#EDEEE9` and `#55604A` are the lime plaster and the
-olive terraces the house sits among.
+Two sources feed the palette, both sampled from files rather than guessed. The
+logo gives `#000000` and `#FBBA16`; `#A67B0E` is the same gold darkened enough to
+pass contrast as text on stone. The entrance photograph gives the rest — walnut
+`#755544`, limestone `#AFA089`, shadow `#241F15`, foliage `#35412F`.
+
+The front door is arched, so every tile is arched, and so is every place
+thumbnail. The shape is taken from the building rather than chosen from a set of
+card styles, which is what keeps the grid from looking like a template.
 
 Type is Bodoni Moda for display, echoing the didone in the logo; IBM Plex Sans
 for the interface, for its clear numerals and full German coverage; IBM Plex Mono
 for the Wi-Fi password only, where telling `l` from `1` is a function rather than
 a style.
 
-There is no frosted glass over photographs anywhere in the app. It looks
-appealing in a promotional video and fails the only test that matters here:
-a tired guest, at night, with the screen dimmed, looking for a password.
+The logo ships in two versions: `logo.png` as supplied, and `logo-light.png`
+generated from it by recolouring the black glyphs to white while keeping the gold
+ampersand, for use over the photograph.
+
+Photographs carry a warm scrim rather than a frosted-glass panel. Frosted glass
+looks appealing in a promotional video and fails the only test that matters here:
+a tired guest, at night, with the screen dimmed.
 
 Fonts load from Google Fonts. For genuinely offline-first behaviour, self-host
 them and add them to the service worker shell list.
