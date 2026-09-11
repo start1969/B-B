@@ -1,5 +1,16 @@
-/* Offline-first shell. Bump CACHE when you change any listed file. */
-const CACHE = "lacrema-v3";
+/**
+ * Service worker — offline support without stale pages.
+ *
+ * The rule that matters: HTML and configuration come from the network first,
+ * so an edit reaches guests on the next load. Everything else (CSS, JS, images,
+ * icons) is served from the cache first, because those files only change when
+ * you bump CACHE below — and bumping it wipes the old one on activation.
+ *
+ * Bump CACHE whenever you change a file in SHELL. Content edits inside
+ * config/ never need it.
+ */
+
+const CACHE = "lacrema-v5";
 
 const SHELL = [
   "./",
@@ -15,38 +26,68 @@ const SHELL = [
   "config/lacrema.json"
 ];
 
-self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
+/* Install: fetch every shell file bypassing the browser's own HTTP cache,
+   otherwise a stale copy can be promoted straight into the new cache. */
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches
+      .open(CACHE)
+      .then((cache) =>
+        cache.addAll(SHELL.map((url) => new Request(url, { cache: "reload" })))
+      )
+      .then(() => self.skipWaiting())
+  );
 });
 
-self.addEventListener("activate", (e) => {
-  e.waitUntil(
-    caches.keys()
+/* Activate: drop every older cache, then take over open pages immediately. */
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches
+      .keys()
       .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
 
-/* Network-first for the config so edits reach guests; cache-first otherwise. */
-self.addEventListener("fetch", (e) => {
-  if (e.request.method !== "GET") return;
+/* A message channel so a page can force the new worker to take over. */
+self.addEventListener("message", (event) => {
+  if (event.data === "skipWaiting") self.skipWaiting();
+});
 
-  const isConfig = e.request.url.includes("/config/");
-
-  if (isConfig) {
-    e.respondWith(
-      fetch(e.request)
-        .then((res) => {
-          const copy = res.clone();
-          caches.open(CACHE).then((c) => c.put(e.request, copy));
-          return res;
-        })
-        .catch(() => caches.match(e.request))
+function networkFirst(request) {
+  return fetch(request)
+    .then((response) => {
+      const copy = response.clone();
+      caches.open(CACHE).then((cache) => cache.put(request, copy));
+      return response;
+    })
+    .catch(() =>
+      caches.match(request).then((hit) => hit || caches.match("index.html"))
     );
-    return;
-  }
+}
 
-  e.respondWith(
-    caches.match(e.request).then((hit) => hit || fetch(e.request))
+function cacheFirst(request) {
+  return caches.match(request).then(
+    (hit) =>
+      hit ||
+      fetch(request).then((response) => {
+        const copy = response.clone();
+        caches.open(CACHE).then((cache) => cache.put(request, copy));
+        return response;
+      })
   );
+}
+
+self.addEventListener("fetch", (event) => {
+  const { request } = event;
+
+  if (request.method !== "GET") return;
+
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) return; // fonts and other origins
+
+  const isPage = request.mode === "navigate" || url.pathname.endsWith(".html");
+  const isConfig = url.pathname.includes("/config/");
+
+  event.respondWith(isPage || isConfig ? networkFirst(request) : cacheFirst(request));
 });

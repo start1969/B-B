@@ -100,43 +100,50 @@ function renderHome() {
 
   const tiles = sections
     .map(
-      (s) => `
+      (sec) => `
       <li>
-        <button class="tile" data-go="${esc(s.id)}">
-          <span class="tile__icon">${icon(s.icon, 26)}</span>
-          <span class="tile__label">${val(s.label)}</span>
+        <button class="tile" data-go="${esc(sec.id)}">
+          <span class="tile__icon">${icon(sec.icon, 24)}</span>
+          <span class="tile__label">${val(sec.label)}</span>
         </button>
       </li>`
     )
     .join("");
 
-  const photo = property.photo
-    ? ` style="background-image:url('${esc(property.photo)}')"`
-    : "";
-
   return `
-    <section class="hero"${photo}>
-      <div class="hero__top">${langSwitcher("langs--onphoto")}</div>
-      <div class="hero__mark">
-        <img class="hero__logo" src="${esc(property.logoLight ?? property.logo)}"
-             alt="${esc(property.name)}">
-        <p class="hero__tagline">${val(property.tagline)}</p>
-        <p class="hero__from">${val(host.greeting)}</p>
-        <a class="hero__call" href="${tel(host.phone)}">${esc(t.call)}</a>
-      </div>
-    </section>
-
-    <section class="band band--stone">
-      <div>
-        <h2 class="band__title band__title--center">${esc(t.sections)}</h2>
-        <ul class="tiles">${tiles}</ul>
-      </div>
+    <section class="home">
+      ${langSwitcher()}
+      <img class="home__logo" src="${esc(property.logoLight ?? property.logo)}"
+           alt="${esc(property.name)}">
+      <p class="home__tagline">${val(property.tagline)}</p>
+      <div class="home__tiles"><ul class="tiles">${tiles}</ul></div>
+      <a class="home__call" href="${tel(host.phone)}">
+        ${icon("phone", 16)} ${esc(t.call)}
+      </a>
+      <p class="home__colophon">
+        ${esc(t.updated)} ${esc(config.updated)} ·
+        <a href="${esc(property.website)}" target="_blank" rel="noopener">${esc(
+          property.website.replace(/^https?:\/\//, "")
+        )}</a>
+      </p>
     </section>`;
 }
 
 /* -------------------------------------------------------------------------
    Section renderers, one per "type" in the config
    ------------------------------------------------------------------------- */
+
+/** One row in a contact list — shared by the emergency and contacts types. */
+function contactRow(c) {
+  return `
+    <li class="contact">
+      <div>
+        <p class="contact__name">${name(c.name)}</p>
+        <p class="contact__detail">${val(c.detail)}</p>
+      </div>
+      ${tel(c.phone) ? `<a href="${tel(c.phone)}">${icon("phone", 14)} ${esc(t.callNow)}</a>` : ""}
+    </li>`;
+}
 
 const TYPES = {
   text: (s) => `<div class="prose"><p>${val(s.body)}</p></div>`,
@@ -211,19 +218,22 @@ const TYPES = {
       ${anyTimes ? `<p class="disclaimer">${val(config.travelNote)}</p>` : ""}`;
   },
 
-  emergency: (s) => {
-    const contacts = s.contacts
+  contacts: (s) => {
+    const groups = (s.groups ?? [])
       .map(
-        (c) => `
-        <li class="contact">
-          <div>
-            <p class="contact__name">${name(c.name)}</p>
-            <p class="contact__detail">${val(c.detail)}</p>
-          </div>
-          ${tel(c.phone) ? `<a href="${tel(c.phone)}">${esc(t.callNow)}</a>` : ""}
-        </li>`
+        (g) => `
+        <div class="group">
+          <h3 class="group__label">${val(g.label)}</h3>
+          <ul class="contacts">${g.items.map(contactRow).join("")}</ul>
+        </div>`
       )
       .join("");
+
+    return `${s.intro ? `<p class="prose">${val(s.intro)}</p>` : ""}${groups}`;
+  },
+
+  emergency: (s) => {
+    const contacts = s.contacts.map(contactRow).join("");
 
     return `
       <a class="emergency-call" href="tel:${esc(s.generic.number)}">
@@ -239,13 +249,12 @@ function renderSection(id) {
   if (!s) return renderHome();
 
   const render = TYPES[s.type] ?? TYPES.text;
-  const dark = s.type === "emergency";
 
   return `
-    <section class="band${dark ? " band--ink" : ""}">
+    <section class="band">
       <div>
         <button class="back" data-go="home">${icon("home", 16)} ${esc(t.home)}</button>
-        <h2 class="band__title band__title--section">
+        <h2 class="band__title">
           <span class="band__icon">${icon(s.icon, 28)}</span>
           ${val(s.label)}
         </h2>
@@ -263,15 +272,11 @@ function renderShell() {
 
   $("#masthead").innerHTML = `
     <button class="masthead__home" data-go="home" aria-label="${esc(t.home)}">
-      <img class="masthead__logo" src="${esc(property.logo)}" alt="${esc(property.name)}">
+      <img class="masthead__logo" src="${esc(property.logoLight ?? property.logo)}" alt="${esc(property.name)}">
     </button>
     ${langSwitcher()}`;
 
-  $("#colophon").innerHTML = `
-    ${esc(t.updated)} ${esc(config.updated)} ·
-    <a href="${esc(property.website)}" target="_blank" rel="noopener">${esc(
-      property.website.replace(/^https?:\/\//, "")
-    )}</a>`;
+  $("#colophon").innerHTML = "";
 }
 
 function renderRoute() {
@@ -356,11 +361,58 @@ async function boot() {
   document.documentElement.lang = lang;
   document.title = config.property.name;
 
+  if (config.property.photo) {
+    // Resolved against the document: inside a custom property a relative URL
+    // would otherwise be resolved against the stylesheet's own folder.
+    const src = new URL(config.property.photo, document.baseURI).href;
+    document.documentElement.style.setProperty("--photo", `url("${src}")`);
+  }
+
   route = location.hash.slice(1) || "home";
   renderShell();
   renderRoute();
 
-  if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+  registerServiceWorker();
+}
+
+/**
+ * Register the worker and adopt a new version as soon as one is published.
+ * Without this a guest keeps the copy cached on their first visit, and an edit
+ * to the house rules never reaches them.
+ */
+function registerServiceWorker() {
+  if (!("serviceWorker" in navigator)) return;
+
+  let reloading = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (reloading) return;
+    reloading = true;
+    location.reload();
+  });
+
+  navigator.serviceWorker
+    .register("sw.js")
+    .then((reg) => {
+      reg.update();
+
+      reg.addEventListener("updatefound", () => {
+        const incoming = reg.installing;
+        if (!incoming) return;
+
+        incoming.addEventListener("statechange", () => {
+          // A new worker is ready and an old one is in charge: hand over now.
+          if (incoming.state === "installed" && navigator.serviceWorker.controller) {
+            incoming.postMessage("skipWaiting");
+          }
+        });
+      });
+
+      // Check again when the guest returns to the app.
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") reg.update();
+      });
+    })
+    .catch(() => {});
 }
 
 boot();

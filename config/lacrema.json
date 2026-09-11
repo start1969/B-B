@@ -385,24 +385,38 @@
           ],
           "walkMin": 40,
           "driveMin": 8,
-          "photo": null,
-          "note": {
-            "it": "Linea Genova–Ventimiglia. Regionali frequenti verso Savona e Albenga.",
-            "en": "Genoa–Ventimiglia line. Frequent regional trains to Savona and Albenga.",
-            "de": "Strecke Genua–Ventimiglia. Häufige Regionalzüge nach Savona und Albenga."
-          }
-        },
-        {
-          "name": "DA_COMPLETARE — taxi",
-          "coords": null,
-          "walkMin": null,
-          "driveMin": null,
           "phone": null,
           "photo": null,
           "note": {
-            "it": "Il numero del taxi di fiducia di Mario. È l'informazione più richiesta la sera.",
-            "en": "Mario's trusted taxi number — the most requested piece of information at night.",
-            "de": "Marios Taxinummer — die am häufigsten nachgefragte Information am Abend."
+            "it": "Linea Genova–Ventimiglia. Regionali frequenti verso Savona e Albenga, Intercity per Milano e Roma.",
+            "en": "Genoa–Ventimiglia line. Frequent regional trains to Savona and Albenga, Intercity to Milan and Rome.",
+            "de": "Strecke Genua–Ventimiglia. Regionalzüge nach Savona und Albenga, Intercity nach Mailand und Rom."
+          }
+        },
+        {
+          "name": "Taxi Finalpia",
+          "coords": null,
+          "walkMin": null,
+          "driveMin": null,
+          "phone": "+393936444444",
+          "photo": null,
+          "note": {
+            "it": "Attivo 24 ore su 24. Risponde anche su WhatsApp. Per risalire la sera è la soluzione più semplice.",
+            "en": "Open 24 hours, also reachable on WhatsApp. The simplest way back up the hill at night.",
+            "de": "Rund um die Uhr, auch über WhatsApp. Abends der einfachste Weg zurück den Hang hinauf."
+          }
+        },
+        {
+          "name": "Taxi Bertone",
+          "coords": null,
+          "walkMin": null,
+          "driveMin": null,
+          "phone": "+393936252525",
+          "photo": null,
+          "note": {
+            "it": "Via San Francesco 36. Anche minibus da nove posti e transfer per gli aeroporti di Genova e Nizza.",
+            "en": "Via San Francesco 36. Nine-seat minibus and transfers to Genoa and Nice airports.",
+            "de": "Via San Francesco 36. Auch Neunsitzer-Minibus und Transfers zu den Flughäfen Genua und Nizza."
           }
         },
         {
@@ -410,6 +424,7 @@
           "coords": null,
           "walkMin": null,
           "driveMin": null,
+          "phone": null,
           "photo": null,
           "note": {
             "it": "La fermata TPL più vicina alla casa e la linea che scende in Marina.",
@@ -780,39 +795,48 @@
       },
       "contacts": [
         {
-          "name": "Mario",
-          "phone": "+393534737296",
+          "name": "Guardia medica",
+          "phone": "800556688",
           "detail": {
-            "it": "Il tuo host",
-            "en": "Your host",
-            "de": "Ihr Gastgeber"
+            "it": "Numero verde ASL2, valido in tutta la provincia. Notti, weekend e festivi. Il polo è al Ruffini di Finale.",
+            "en": "ASL2 freephone, valid across the province. Nights, weekends and holidays.",
+            "de": "Kostenlose ASL2-Nummer für die ganze Provinz. Nachts, Wochenende und Feiertage."
+          }
+        },
+        {
+          "name": "Pronto soccorso — Santa Corona",
+          "phone": "+390196234488",
+          "detail": {
+            "it": "Pietra Ligure, Via XXV Aprile 38. È il pronto soccorso di riferimento, circa 15 minuti in auto.",
+            "en": "Pietra Ligure, Via XXV Aprile 38. The reference emergency department, about 15 minutes by car.",
+            "de": "Pietra Ligure, Via XXV Aprile 38. Zuständige Notaufnahme, etwa 15 Autominuten."
+          }
+        },
+        {
+          "name": "Ospedale Santa Corona — centralino",
+          "phone": "+3901962301",
+          "detail": {
+            "it": "Per reparti e informazioni.",
+            "en": "For wards and information.",
+            "de": "Für Stationen und Auskünfte."
           }
         },
         {
           "name": "Farmacia della Marina",
-          "phone": "+390196926 70",
+          "phone": "+39019692670",
           "detail": {
-            "it": "8:00–20:00 · Via Pertica 61",
-            "en": "8:00–20:00 · Via Pertica 61",
-            "de": "8:00–20:00 · Via Pertica 61"
+            "it": "Via Tommaso Pertica 61. Aperta 8:00–20:00 tutti i giorni, festivi compresi.",
+            "en": "Via Tommaso Pertica 61. Open 8:00–20:00 every day, holidays included.",
+            "de": "Via Tommaso Pertica 61. Täglich 8:00–20:00, auch an Feiertagen."
           }
         },
         {
-          "name": "Farmacia Richeri",
-          "phone": "+390196017 03",
+          "name": "Mario",
+          "phone": "+393534737296",
           "detail": {
-            "it": "Corso Europa 21 · distributore automatico",
-            "en": "Corso Europa 21 · vending machine",
-            "de": "Corso Europa 21 · Automat"
-          }
-        },
-        {
-          "name": "DA_COMPLETARE — guardia medica",
-          "phone": null,
-          "detail": {
-            "it": "Il numero notturno e festivo della zona.",
-            "en": "The local out-of-hours doctor number.",
-            "de": "Ärztlicher Notdienst der Region."
+            "it": "Il tuo host. Se sei in difficoltà, chiamalo comunque.",
+            "en": "Your host. If you are in trouble, call him anyway.",
+            "de": "Ihr Gastgeber. Im Zweifel rufen Sie ihn an."
           }
         }
       ]
@@ -821,48 +845,187 @@
       "id": "contacts",
       "icon": "phone",
       "label": {
-        "it": "Contatti",
-        "en": "Contacts",
-        "de": "Kontakt"
+        "it": "Numeri utili",
+        "en": "Useful numbers",
+        "de": "Nützliche Nummern"
       },
-      "type": "rows",
-      "rows": [
+      "type": "contacts",
+      "intro": {
+        "it": "Numeri verificati della zona. Per qualunque emergenza il 112 resta il primo numero da comporre.",
+        "en": "Verified local numbers. For any emergency, 112 remains the first number to dial.",
+        "de": "Geprüfte Nummern vor Ort. Im Notfall gilt zuerst immer die 112."
+      },
+      "groups": [
         {
-          "key": {
-            "it": "Mario",
-            "en": "Mario",
-            "de": "Mario"
+          "label": {
+            "it": "La casa",
+            "en": "The house",
+            "de": "Das Haus"
           },
-          "val": {
-            "it": "+39 353 473 7296",
-            "en": "+39 353 473 7296",
-            "de": "+39 353 473 7296"
-          },
-          "big": true
+          "items": [
+            {
+              "name": "Mario",
+              "phone": "+393534737296",
+              "detail": {
+                "it": "Italiano, inglese, tedesco",
+                "en": "Italian, English, German",
+                "de": "Italienisch, Englisch, Deutsch"
+              }
+            }
+          ]
         },
         {
-          "key": {
-            "it": "Lingue",
-            "en": "Languages",
-            "de": "Sprachen"
+          "label": {
+            "it": "Taxi",
+            "en": "Taxi",
+            "de": "Taxi"
           },
-          "val": {
-            "it": "Italiano, inglese, tedesco.",
-            "en": "Italian, English, German.",
-            "de": "Italienisch, Englisch, Deutsch."
-          }
+          "items": [
+            {
+              "name": "Taxi Finalpia",
+              "phone": "+393936444444",
+              "detail": {
+                "it": "24 ore su 24, anche WhatsApp",
+                "en": "24 hours, also WhatsApp",
+                "de": "Rund um die Uhr, auch WhatsApp"
+              }
+            },
+            {
+              "name": "Taxi Bertone",
+              "phone": "+393936252525",
+              "detail": {
+                "it": "Anche minibus e transfer aeroporti",
+                "en": "Minibus and airport transfers",
+                "de": "Minibus und Flughafentransfers"
+              }
+            }
+          ]
         },
         {
-          "key": {
-            "it": "Sito",
-            "en": "Website",
-            "de": "Website"
+          "label": {
+            "it": "Salute",
+            "en": "Health",
+            "de": "Gesundheit"
           },
-          "val": {
-            "it": "beblacrema.it",
-            "en": "beblacrema.it",
-            "de": "beblacrema.it"
-          }
+          "items": [
+            {
+              "name": "Guardia medica",
+              "phone": "800556688",
+              "detail": {
+                "it": "Numero verde, notti e festivi",
+                "en": "Freephone, nights and holidays",
+                "de": "Kostenlos, nachts und feiertags"
+              }
+            },
+            {
+              "name": "Pronto soccorso Santa Corona",
+              "phone": "+390196234488",
+              "detail": {
+                "it": "Pietra Ligure, ~15 min in auto",
+                "en": "Pietra Ligure, ~15 min by car",
+                "de": "Pietra Ligure, ~15 Min mit dem Auto"
+              }
+            },
+            {
+              "name": "Farmacia della Marina",
+              "phone": "+39019692670",
+              "detail": {
+                "it": "8:00–20:00 tutti i giorni",
+                "en": "8:00–20:00 every day",
+                "de": "Täglich 8:00–20:00"
+              }
+            }
+          ]
+        },
+        {
+          "label": {
+            "it": "Forze dell'ordine",
+            "en": "Police",
+            "de": "Polizei"
+          },
+          "items": [
+            {
+              "name": "Carabinieri — Finale Ligure",
+              "phone": "+39019692666",
+              "detail": {
+                "it": "Via Domenico Brunenghi 68",
+                "en": "Via Domenico Brunenghi 68",
+                "de": "Via Domenico Brunenghi 68"
+              }
+            },
+            {
+              "name": "Polizia municipale",
+              "phone": "+39019691380",
+              "detail": {
+                "it": "Via Ghiglieri 10",
+                "en": "Via Ghiglieri 10",
+                "de": "Via Ghiglieri 10"
+              }
+            },
+            {
+              "name": "Polizia stradale",
+              "phone": "+39019681501",
+              "detail": {
+                "it": "Via Alessandro Manzoni 3",
+                "en": "Via Alessandro Manzoni 3",
+                "de": "Via Alessandro Manzoni 3"
+              }
+            },
+            {
+              "name": "Guardia di finanza",
+              "phone": "+39019692700",
+              "detail": {
+                "it": "Finale Ligure",
+                "en": "Finale Ligure",
+                "de": "Finale Ligure"
+              }
+            }
+          ]
+        },
+        {
+          "label": {
+            "it": "Servizi",
+            "en": "Services",
+            "de": "Dienste"
+          },
+          "items": [
+            {
+              "name": "Comune di Finale Ligure",
+              "phone": "+39019689011",
+              "detail": {
+                "it": "Centralino",
+                "en": "Switchboard",
+                "de": "Zentrale"
+              }
+            },
+            {
+              "name": "Guardia costiera",
+              "phone": "1530",
+              "detail": {
+                "it": "Emergenze in mare",
+                "en": "Emergencies at sea",
+                "de": "Seenotfälle"
+              }
+            },
+            {
+              "name": "Viaggiare informati",
+              "phone": "1518",
+              "detail": {
+                "it": "Traffico e viabilità",
+                "en": "Traffic and road conditions",
+                "de": "Verkehrslage"
+              }
+            },
+            {
+              "name": "Antiviolenza donne",
+              "phone": "1522",
+              "detail": {
+                "it": "Attivo 24 ore, multilingue",
+                "en": "24 hours, multilingual",
+                "de": "Rund um die Uhr, mehrsprachig"
+              }
+            }
+          ]
         }
       ]
     }

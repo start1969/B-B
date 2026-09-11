@@ -9,9 +9,10 @@ designed so that another property can fork it and change one JSON file.
 
 ## How it works for a guest
 
-The home screen is the front door: a full-height photograph of the entrance, the
-logo centred over it, the greeting, and one discreet tap-to-call. Below sits a
-grid of fifteen arched tiles. Tap one, read it, tap home.
+The home screen is the front door. The entrance photograph fills the viewport,
+the logo sits centred at the top, and fifteen square glass tiles float over it —
+everything on one screen, no scrolling before the first tap. Tap a tile, read it,
+tap home. A single call button sits at the foot.
 
 Interface and content are in Italian, English and German, chosen from the phone's
 language and overridable by the guest. Languages are named in their own language
@@ -49,7 +50,8 @@ how it renders:
 | `places` | list with photo, walking and driving time, call and map | restaurants, beaches, shops |
 | `amenities` | icon list with a short description | what the house offers |
 | `wifi` | the Wi-Fi card | network and password |
-| `emergency` | large call button plus contacts, on black | emergency numbers |
+| `emergency` | large call button plus contacts | emergency numbers |
+| `contacts` | contacts grouped under headings | useful local numbers |
 | `text` | a paragraph | anything else |
 
 Icons come from `assets/js/icons.js`, drawn for this project at a hairline weight
@@ -80,10 +82,9 @@ Outstanding for Lacrêma, in order of value:
    Maps.
 2. Wi-Fi network and password.
 3. Breakfast time and where it is served.
-4. The trusted taxi number, and the nearest bus stop.
+4. The nearest bus stop and the line down to the seafront.
 5. The nearest supermarket, the bakery, the market day.
-6. The out-of-hours doctor number.
-7. Quiet hours, smoking policy, where to leave the keys at check-out.
+6. Quiet hours, smoking policy, where to leave the keys at check-out.
 8. Photographs of the recommended places — real ones, not stock. Set the `photo`
    field on each place; until then the slot shows a marked placeholder.
 
@@ -103,10 +104,26 @@ python3 -m http.server 8000
 2. Settings → Pages → deploy from branch, root folder.
 3. Generate a QR code pointing at the published URL and put it in each room.
 
-`.nojekyll` is included so GitHub Pages serves the files untouched. When you
-change any file in the shell list, bump `CACHE` in `sw.js` so guests get the new
-version instead of the cached one. Content changes in `config/` do not need it —
-the service worker fetches the config from the network first.
+`.nojekyll` is included so GitHub Pages serves the files untouched.
+
+Put the files in the repository root, not inside a subfolder — every path in the
+app is relative, so a stray `lacrema-welcome/` level will serve a blank page.
+
+### Publishing an update
+
+The service worker fetches `index.html` and anything under `config/` from the
+network first, so content edits reach guests on the next load with nothing else
+to do.
+
+When you change CSS, JS or an image, bump `CACHE` in `sw.js` (`lacrema-v4` →
+`lacrema-v5`). On the next visit the new worker installs, deletes the old cache,
+takes over immediately and the page reloads itself once. Forget the bump and
+guests keep the old stylesheet.
+
+If you are testing and the browser still shows the previous version, unregister
+the worker once: developer tools → Application → Service Workers → Unregister,
+then Storage → Clear site data. On iOS, an app added to the Home screen keeps its
+own cache — remove the icon and add it again.
 
 ## Design
 
@@ -115,9 +132,15 @@ logo gives `#000000` and `#FBBA16`; `#A67B0E` is the same gold darkened enough t
 pass contrast as text on stone. The entrance photograph gives the rest — walnut
 `#755544`, limestone `#AFA089`, shadow `#241F15`, foliage `#35412F`.
 
-The front door is arched, so every tile is arched, and so is every place
-thumbnail. The shape is taken from the building rather than chosen from a set of
-card styles, which is what keeps the grid from looking like a template.
+The photograph is not a header image: it is fixed behind the entire application,
+so the house stays present on every screen while content scrolls over it. The
+scrim is lighter on the home, where the doorway should read, and nearly solid on
+the inner pages, where long text has to stay comfortable.
+
+Tiles are dark glass rather than light. Light frosted panels depend on
+`backdrop-filter`, which not every browser honours, and over a bright patch of a
+photograph they leave white text stranded. A dark tint guarantees the contrast
+whatever sits behind it, and still reads as transparent.
 
 Type is Bodoni Moda for display, echoing the didone in the logo; IBM Plex Sans
 for the interface, for its clear numerals and full German coverage; IBM Plex Mono
@@ -134,6 +157,17 @@ a tired guest, at night, with the screen dimmed.
 
 Fonts load from Google Fonts. For genuinely offline-first behaviour, self-host
 them and add them to the service worker shell list.
+
+## Local numbers
+
+The emergency and useful-numbers sections are filled in with verified local
+data rather than placeholders: the ASL2 out-of-hours doctor freephone, the
+emergency department at Santa Corona in Pietra Ligure, the two Finale taxi
+firms, the Carabinieri and municipal police stations, the coastguard, and the
+pharmacy on Via Pertica that opens every day of the year.
+
+Numbers move. Check them once a season, and treat 112 as the one that never
+changes.
 
 ## Data and attribution
 

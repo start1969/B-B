@@ -1,28 +1,30 @@
 /* ==========================================================================
    B&B Lacrêma — welcome app
 
-   Two sources feed the palette: the logo (#000000 / #FBBA16) and the entrance
-   photograph, sampled directly — limestone, walnut, foliage, shadow.
-   The arch of the front door becomes the shape of every tile.
+   The entrance photograph is the background of the whole application, fixed
+   behind everything, so the house is present on every screen. Content floats
+   over it on glass. The scrim is deliberately heavy: legibility at night with
+   a dimmed screen is the requirement the design has to meet first.
    ========================================================================== */
 
 :root {
   /* From the logo */
-  --ink:       #000000;
   --gold:      #FBBA16;
-  --gold-deep: #A67B0E;
+  --gold-soft: #FFD166;
 
   /* Sampled from the entrance photograph */
   --bark:      #241F15;
   --wood:      #755544;
   --limestone: #AFA089;
-  --stone:     #E8E3D9;
-  --stone-hi:  #F3F0EA;
-  --line:      #CFC7B7;
-  --foliage:   #35412F;
-  --muted:     #5A5346;
 
-  --paper:     #FFFFFF;
+  /* Text on the dark ground */
+  --text:      #F5F2EB;
+  --muted:     #BDB3A1;
+
+  --glass:        rgba(20, 17, 11, 0.52);
+  --glass-strong: rgba(20, 17, 11, 0.58);
+  --edge:         rgba(255, 255, 255, 0.26);
+  --line:         rgba(255, 255, 255, 0.16);
 
   --display: "Bodoni Moda", "Didot", "Bodoni MT", Georgia, serif;
   --ui: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -32,9 +34,8 @@
   --t-sm:   0.875rem;
   --t-base: 1.0625rem;
   --t-md:   1.1875rem;
-  --t-lg:   1.4375rem;
+  --t-lg:   1.375rem;
   --t-xl:   1.75rem;
-  --t-2xl:  2rem;
 
   --s-1: 0.25rem;
   --s-2: 0.5rem;
@@ -54,13 +55,43 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink);
+  min-height: 100svh;
+  background: var(--bark);
+  color: var(--text);
   font-family: var(--ui);
   font-size: var(--t-base);
   line-height: 1.55;
-  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
+
+/* The photograph, fixed behind the whole app. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: var(--photo, none);
+  background-size: cover;
+  background-position: 40% 44%;
+  background-color: var(--bark);
+}
+
+/* The scrim. Lighter on the home, where the doorway should read; nearly solid
+   on the inner pages, where long text has to stay comfortable. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 17, 11, 0.60) 0%,
+    rgba(20, 17, 11, 0.34) 30%,
+    rgba(20, 17, 11, 0.52) 58%,
+    rgba(20, 17, 11, 0.82) 100%
+  );
+}
+
+body:not(.is-home)::after { background: rgba(20, 17, 11, 0.90); }
 
 img { max-width: 100%; display: block; }
 a { color: inherit; }
@@ -75,13 +106,162 @@ button {
 }
 
 :focus-visible {
-  outline: 3px solid var(--gold);
-  outline-offset: 2px;
-  border-radius: 2px;
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 /* --------------------------------------------------------------------------
-   Masthead — section pages only; on the home the logo lives in the photograph
+   Language switcher
+   -------------------------------------------------------------------------- */
+
+.langs { display: flex; gap: var(--s-2); justify-content: center; flex-wrap: wrap; }
+
+.langs button {
+  padding: var(--s-1) var(--s-3);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  color: rgba(245, 242, 235, 0.72);
+  background: var(--glass);
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.langs button[aria-pressed="true"] {
+  background: var(--gold);
+  color: var(--bark);
+  border-color: var(--gold);
+}
+
+/* --------------------------------------------------------------------------
+   Home — logo, then the grid, all of it over the photograph
+   -------------------------------------------------------------------------- */
+
+.home {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-2);
+  padding:
+    calc(var(--s-4) + env(safe-area-inset-top, 0px))
+    var(--s-6)
+    calc(var(--s-5) + env(safe-area-inset-bottom, 0px));
+  max-width: 34rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.home__logo {
+  width: min(50vw, 12.5rem);
+  height: auto;
+  margin: var(--s-2) auto 0;
+}
+
+.home__tagline {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: var(--t-base);
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  margin: 0 auto;
+  max-width: 26ch;
+  text-shadow: 0 2px 18px rgba(20, 17, 11, 0.85);
+}
+
+.home__tiles { width: 100%; margin-top: var(--s-1); }
+
+.home__call {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: var(--s-2);
+  padding: var(--s-3) var(--s-5);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--bark);
+  background: var(--gold);
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.home__colophon {
+  margin: var(--s-2) 0 0;
+  font-size: 0.6875rem;
+  color: rgba(245, 242, 235, 0.55);
+}
+
+.home__colophon a { color: rgba(245, 242, 235, 0.75); }
+
+/* --------------------------------------------------------------------------
+   The launcher — square glass tiles
+   -------------------------------------------------------------------------- */
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tile {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-1);
+  background: var(--glass);
+  border: 1px solid var(--edge);
+  border-radius: 14px;
+  box-shadow: 0 2px 18px rgba(20, 17, 11, 0.28);
+  color: var(--text);
+  text-align: center;
+  backdrop-filter: blur(16px) saturate(115%);
+  -webkit-backdrop-filter: blur(16px) saturate(115%);
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.tile__icon { display: flex; color: var(--gold-soft); transition: color 0.18s ease; }
+
+.tile__label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+  hyphens: auto;
+  text-shadow: 0 1px 8px rgba(20, 17, 11, 0.7);
+}
+
+.tile:hover,
+.tile:focus-visible {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--bark);
+  transform: translateY(-2px);
+}
+
+.tile:hover .tile__icon,
+.tile:focus-visible .tile__icon { color: var(--bark); }
+
+.tile:hover .tile__label,
+.tile:focus-visible .tile__label { text-shadow: none; }
+
+.tile:active { transform: none; }
+
+@media (min-width: 30rem) {
+  .tiles { grid-template-columns: repeat(4, 1fr); gap: var(--s-3); }
+}
+
+/* --------------------------------------------------------------------------
+   Section pages
    -------------------------------------------------------------------------- */
 
 .masthead {
@@ -90,7 +270,7 @@ button {
   justify-content: space-between;
   gap: var(--s-4);
   flex-wrap: wrap;
-  padding: var(--s-5) var(--s-5) var(--s-4);
+  padding: calc(var(--s-5) + env(safe-area-inset-top, 0px)) var(--s-5) var(--s-4);
   max-width: var(--column);
   margin-inline: auto;
 }
@@ -98,132 +278,11 @@ button {
 body.is-home .masthead { display: none; }
 
 .masthead__home { padding: 0; }
-.masthead__logo { width: 148px; height: auto; }
+.masthead__logo { width: 136px; height: auto; }
+.masthead .langs { justify-content: flex-end; }
 
-/* --------------------------------------------------------------------------
-   Language switcher
-   -------------------------------------------------------------------------- */
-
-.langs { display: flex; gap: var(--s-1); }
-
-.langs button {
-  padding: var(--s-1) var(--s-3);
-  font-size: var(--t-xs);
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--muted);
-  border-radius: 999px;
-  transition: background 0.15s, color 0.15s;
-}
-
-.langs button[aria-pressed="true"] { background: var(--ink); color: var(--gold); }
-
-/* On the photograph the same control has to read against a moving background */
-.langs--onphoto button {
-  color: rgba(255, 255, 255, 0.82);
-  background: rgba(36, 31, 21, 0.42);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-}
-
-.langs--onphoto button[aria-pressed="true"] {
-  background: var(--gold);
-  color: var(--bark);
-  border-color: var(--gold);
-}
-
-/* --------------------------------------------------------------------------
-   Hero — the doorway
-   -------------------------------------------------------------------------- */
-
-.hero {
-  position: relative;
-  isolation: isolate;
-  min-height: 78svh;
-  display: flex;
-  flex-direction: column;
-  padding: calc(var(--s-5) + env(safe-area-inset-top, 0px)) var(--s-5) var(--s-7);
-  background-color: var(--bark);
-  background-position: center 42%;
-  background-size: cover;
-  color: var(--paper);
-  text-align: center;
-}
-
-/* Warm scrim: dark at the top so the language pills hold, dark at the foot so
-   the logo and the greeting hold. The middle stays open on the doorway. */
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(36, 31, 21, 0.58) 0%,
-      rgba(36, 31, 21, 0.12) 24%,
-      rgba(36, 31, 21, 0.42) 52%,
-      rgba(36, 31, 21, 0.80) 72%,
-      rgba(36, 31, 21, 0.94) 100%
-    );
-}
-
-.hero__top {
-  display: flex;
-  justify-content: center;
-  margin-bottom: auto;
-}
-
-.hero__mark { margin: var(--s-7) 0 0; }
-
-.hero__logo {
-  width: min(74vw, 20rem);
-  height: auto;
-  margin-inline: auto;
-}
-
-.hero__tagline {
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: var(--t-lg);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  margin: var(--s-5) auto 0;
-  max-width: 24ch;
-  text-shadow: 0 1px 14px rgba(36, 31, 21, 0.6);
-}
-
-.hero__from {
-  margin: var(--s-3) auto 0;
-  max-width: 34ch;
-  font-size: var(--t-sm);
-  color: rgba(255, 255, 255, 0.86);
-  text-shadow: 0 1px 12px rgba(36, 31, 21, 0.7);
-}
-
-.hero__call {
-  display: inline-block;
-  margin-top: var(--s-5);
-  padding-bottom: 2px;
-  font-weight: 600;
-  font-size: var(--t-sm);
-  color: var(--gold);
-  text-decoration: none;
-  border-bottom: 2px solid var(--gold);
-}
-
-/* --------------------------------------------------------------------------
-   Bands
-   -------------------------------------------------------------------------- */
-
-.band { padding: var(--s-7) var(--s-5); }
+.band { padding: var(--s-5) var(--s-5) var(--s-7); }
 .band > * { max-width: var(--column); margin-inline: auto; }
-
-.band--stone { background: var(--stone); }
-.band--ink   { background: var(--bark); color: var(--paper); }
-
-.panel > .band:first-child { padding-top: var(--s-4); }
 
 .band__title {
   font-family: var(--display);
@@ -232,16 +291,14 @@ body.is-home .masthead { display: none; }
   line-height: 1.15;
   letter-spacing: -0.01em;
   margin: 0 0 var(--s-5);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
 }
 
-.band__title--center { text-align: center; margin-bottom: var(--s-6); }
+.band__icon { flex: none; color: var(--gold); display: flex; }
 
-.band__title--section { display: flex; align-items: center; gap: var(--s-3); }
-
-.band__icon { flex: none; color: var(--gold-deep); display: flex; }
-.band--ink .band__icon { color: var(--gold); }
-
-.prose { max-width: var(--measure); margin: 0 0 var(--s-5); }
+.prose { max-width: var(--measure); margin: 0 0 var(--s-5); color: var(--muted); }
 
 .disclaimer {
   margin: var(--s-5) 0 0;
@@ -250,94 +307,33 @@ body.is-home .masthead { display: none; }
   max-width: var(--measure);
 }
 
-/* --------------------------------------------------------------------------
-   The launcher — each tile is a small arched doorway
-   -------------------------------------------------------------------------- */
-
-.tiles {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--s-3);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.tile {
-  width: 100%;
-  aspect-ratio: 1 / 1.1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--s-4);
-  padding: 10% var(--s-2) var(--s-4);
-  background: var(--stone-hi);
-  border: 1px solid var(--line);
-  border-radius: 999px 999px 5px 5px;
-  text-align: center;
-  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
-}
-
-.tile__icon {
-  color: var(--wood);
-  display: flex;
-  transition: color 0.18s ease;
-}
-
-.tile__label {
-  font-size: var(--t-xs);
-  font-weight: 600;
-  line-height: 1.2;
-  hyphens: auto;
-}
-
-.tile:hover,
-.tile:focus-visible {
-  background: var(--bark);
-  border-color: var(--bark);
-  color: var(--paper);
-  transform: translateY(-2px);
-}
-
-.tile:hover .tile__icon,
-.tile:focus-visible .tile__icon { color: var(--gold); }
-
-.tile:active { transform: none; }
-
-@media (min-width: 30rem) {
-  .tiles { grid-template-columns: repeat(4, 1fr); }
-}
-
-/* --------------------------------------------------------------------------
-   Back to home
-   -------------------------------------------------------------------------- */
-
 .back {
   display: inline-flex;
   align-items: center;
   gap: var(--s-2);
   margin-bottom: var(--s-5);
-  padding: var(--s-2) var(--s-3) var(--s-2) var(--s-2);
+  padding: var(--s-2) var(--s-4) var(--s-2) var(--s-3);
   font-size: var(--t-sm);
   font-weight: 600;
-  color: var(--muted);
+  color: var(--text);
+  background: var(--glass);
+  border: 1px solid var(--edge);
   border-radius: 999px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-.back:hover { background: var(--stone); color: var(--ink); }
-.band--ink .back { color: var(--limestone); }
-.band--ink .back:hover { background: #332C1F; color: var(--paper); }
+.back:hover { background: var(--glass-strong); }
 
 /* --------------------------------------------------------------------------
-   Wi-Fi card — now inside its own section, not on the home
+   Wi-Fi
    -------------------------------------------------------------------------- */
 
 .wifi {
   background: var(--gold);
   color: var(--bark);
   padding: var(--s-5);
-  border-radius: 4px;
+  border-radius: 12px;
 }
 
 .wifi__label { font-size: var(--t-sm); font-weight: 600; margin: 0 0 var(--s-3); }
@@ -358,7 +354,7 @@ body.is-home .masthead { display: none; }
 .wifi__copy {
   flex: none;
   border: 1.5px solid var(--bark);
-  border-radius: 3px;
+  border-radius: 6px;
   padding: var(--s-2) var(--s-3);
   font-family: var(--ui);
   font-size: var(--t-sm);
@@ -387,7 +383,7 @@ body.is-home .masthead { display: none; }
 
 .row:last-child { border-bottom: 1px solid var(--line); }
 
-.row__key { font-weight: 600; font-size: var(--t-sm); margin: 0; padding-top: 0.15em; }
+.row__key { font-weight: 600; font-size: var(--t-sm); margin: 0; padding-top: 0.15em; color: var(--limestone); }
 .row__val { margin: 0; }
 .row__val--big { font-family: var(--display); font-size: var(--t-lg); line-height: 1.2; }
 
@@ -410,7 +406,7 @@ body.is-home .masthead { display: none; }
 
 .amenity:last-child { border-bottom: 1px solid var(--line); }
 
-.amenity__icon { flex: none; color: var(--wood); padding-top: 0.15em; display: flex; }
+.amenity__icon { flex: none; color: var(--gold); padding-top: 0.15em; display: flex; }
 .amenity h3 { margin: 0 0 var(--s-1); font-size: var(--t-base); font-weight: 600; }
 .amenity p { margin: 0; font-size: var(--t-sm); color: var(--muted); max-width: var(--measure); }
 
@@ -422,7 +418,7 @@ body.is-home .masthead { display: none; }
 
 .place {
   display: grid;
-  grid-template-columns: 6.5rem 1fr;
+  grid-template-columns: 6rem 1fr;
   gap: var(--s-4);
   padding: var(--s-5) 0;
   border-top: 1px solid var(--line);
@@ -430,13 +426,12 @@ body.is-home .masthead { display: none; }
 
 .place:last-child { border-bottom: 1px solid var(--line); }
 
-/* The arch again, at list scale */
 .place__photo {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-radius: 999px 999px 4px 4px;
-  background: var(--stone);
+  border-radius: 10px;
+  background: var(--glass);
 }
 
 .place__photo--empty {
@@ -446,16 +441,15 @@ body.is-home .masthead { display: none; }
   justify-content: center;
   gap: var(--s-1);
   padding: var(--s-2);
-  border: 1px dashed var(--line);
-  color: var(--limestone);
+  border: 1px dashed var(--edge);
+  color: rgba(245, 242, 235, 0.45);
   font-size: 0.625rem;
   line-height: 1.2;
   text-align: center;
 }
 
 .place__name { font-family: var(--display); font-size: var(--t-md); font-weight: 500; margin: 0; }
-
-.place__times { margin: var(--s-1) 0 0; font-size: var(--t-sm); font-weight: 600; color: var(--gold-deep); }
+.place__times { margin: var(--s-1) 0 0; font-size: var(--t-sm); font-weight: 600; color: var(--gold); }
 .place__note { margin: var(--s-2) 0 0; color: var(--muted); max-width: var(--measure); }
 .place__closed { margin: var(--s-2) 0 0; font-size: var(--t-sm); font-weight: 600; }
 
@@ -465,16 +459,17 @@ body.is-home .masthead { display: none; }
   font-size: var(--t-sm);
   font-weight: 600;
   text-decoration: none;
+  color: var(--gold);
   border-bottom: 2px solid var(--gold);
   padding-bottom: 1px;
 }
 
 @media (max-width: 26rem) {
-  .place { grid-template-columns: 4.75rem 1fr; gap: var(--s-3); }
+  .place { grid-template-columns: 4.5rem 1fr; gap: var(--s-3); }
 }
 
 /* --------------------------------------------------------------------------
-   Emergency
+   Contacts and emergency
    -------------------------------------------------------------------------- */
 
 .emergency-call {
@@ -485,13 +480,24 @@ body.is-home .masthead { display: none; }
   background: var(--gold);
   color: var(--bark);
   padding: var(--s-5);
-  border-radius: 4px;
+  border-radius: 12px;
   text-decoration: none;
   font-weight: 600;
-  margin-bottom: var(--s-5);
+  margin-bottom: var(--s-6);
 }
 
 .emergency-call strong { font-family: var(--display); font-size: var(--t-xl); line-height: 1; }
+
+.group + .group { margin-top: var(--s-6); }
+
+.group__label {
+  margin: 0 0 var(--s-2);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--limestone);
+}
 
 .contacts { list-style: none; margin: 0; padding: 0; }
 
@@ -501,20 +507,26 @@ body.is-home .masthead { display: none; }
   justify-content: space-between;
   gap: var(--s-4);
   padding: var(--s-4) 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  border-top: 1px solid var(--line);
 }
 
-.contact:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.22); }
+.contact:last-child { border-bottom: 1px solid var(--line); }
 
 .contact__name { margin: 0; font-weight: 600; }
-.contact__detail { margin: var(--s-1) 0 0; font-size: var(--t-sm); color: var(--limestone); }
+.contact__detail { margin: var(--s-1) 0 0; font-size: var(--t-sm); color: var(--muted); }
 
 .contact a {
   flex: none;
-  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-4);
+  color: var(--bark);
+  background: var(--gold);
+  border-radius: 999px;
+  font-size: var(--t-sm);
   font-weight: 600;
   text-decoration: none;
-  border-bottom: 2px solid var(--gold);
 }
 
 /* --------------------------------------------------------------------------
@@ -523,43 +535,26 @@ body.is-home .masthead { display: none; }
 
 .todo {
   display: inline-block;
-  background: repeating-linear-gradient(-45deg,
-    var(--stone), var(--stone) 6px, var(--line) 6px, var(--line) 12px);
-  color: var(--muted);
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px dashed var(--edge);
+  color: var(--limestone);
   padding: 0 var(--s-2);
-  border-radius: 2px;
+  border-radius: 4px;
   font-size: 0.9em;
   font-style: italic;
 }
 
-.band--ink .todo { background: #332C1F; color: var(--limestone); }
-
 /* --------------------------------------------------------------------------
-   Colophon
-   -------------------------------------------------------------------------- */
-
-.colophon {
-  padding: var(--s-6) var(--s-5) var(--s-7);
-  max-width: var(--column);
-  margin-inline: auto;
-  font-size: var(--t-xs);
-  color: var(--muted);
-  text-align: center;
-}
-
-.colophon a { color: var(--gold-deep); }
-
-/* --------------------------------------------------------------------------
-   Motion — one entrance, then stillness
+   Motion
    -------------------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero__logo, .hero__tagline, .hero__from, .hero__call {
+  .home__logo, .home__tagline, .home__tiles, .home__call {
     animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) both;
   }
-  .hero__tagline { animation-delay: 0.1s; }
-  .hero__from    { animation-delay: 0.17s; }
-  .hero__call    { animation-delay: 0.24s; }
+  .home__tagline { animation-delay: 0.08s; }
+  .home__tiles   { animation-delay: 0.16s; }
+  .home__call    { animation-delay: 0.24s; }
 }
 
 @keyframes rise {
@@ -568,7 +563,6 @@ body.is-home .masthead { display: none; }
 }
 
 @media (min-width: 48rem) {
-  :root { --t-2xl: 2.5rem; --t-xl: 2rem; --t-lg: 1.625rem; }
-  .band { padding-inline: var(--s-6); }
-  .hero { min-height: 70svh; }
+  :root { --t-xl: 2rem; --t-lg: 1.5rem; }
+  .home__logo { width: min(38vw, 17rem); }
 }
