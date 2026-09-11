@@ -79,3 +79,85 @@ export function icon(name, size = 24) {
 
 ICONS.info =
   '<circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.4" r="1"/>';
+
+
+/**
+ * Category artwork. Used as the thumbnail for any place that has no photograph
+ * of its own yet. Drawn in the same line language as the icons, on a 100×100
+ * field, so a list without photographs still looks composed rather than empty.
+ *
+ * Photographs of businesses on the web are licensed to their owners, so they
+ * cannot be copied into this repository. Replace a scene by setting the place's
+ * `photo` field to a picture the host has taken.
+ */
+export const SCENES = {
+  sea:
+    `<circle cx="74" cy="26" r="8"/>
+     <path d="M4 56c8 0 14-3 22-9s14-11 22-11 12 5 18 9"/>
+     <path d="M4 62h92" opacity=".35"/>
+     <path d="M8 72c6 0 6-5 12-5s6 5 12 5 6-5 12-5 6 5 12 5 6-5 12-5 6 5 12 5"/>
+     <path d="M8 84c6 0 6-5 12-5s6 5 12 5 6-5 12-5 6 5 12 5 6-5 12-5 6 5 12 5"/>`,
+
+  trail:
+    `<circle cx="76" cy="22" r="7"/>
+     <path d="M4 70 32 40l14 16 14-14 32 28"/>
+     <path d="M4 70h92"/>
+     <path d="M48 94c4-10-6-13-6-21s10-12 10-20"/>
+     <path d="M22 70V56"/><path d="M13 56h18l-9-14z"/>`,
+
+  village:
+    `<path d="M8 88V58l13-11 13 11v30"/>
+     <path d="M21 88V72a5 5 0 0 1 10 0v16"/>
+     <path d="M40 88V44h22v44"/>
+     <path d="M47 62h8v10h-8z"/>
+     <path d="M68 88V30h18v58"/>
+     <path d="M77 30V18"/><path d="M71 18h12"/>
+     <path d="M73 48h8M73 62h8"/>
+     <path d="M4 88h92"/>`,
+
+  table:
+    `<circle cx="50" cy="44" r="21"/>
+     <circle cx="50" cy="44" r="12" opacity=".45"/>
+     <path d="M13 16v13a6 6 0 0 0 12 0V16"/><path d="M19 29v53"/>
+     <path d="M87 16c-6 5-9 12-9 19s3 11 9 11"/><path d="M84 46v36"/>
+     <path d="M8 88h84" opacity=".35"/>`,
+
+  aperitivo:
+    `<path d="M22 28h52L48 58z"/>
+     <path d="M48 58v24"/>
+     <path d="M32 82h32"/>
+     <path d="m58 22 16-10"/>
+     <circle cx="78" cy="10" r="5"/>
+     <path d="M22 28h52" opacity=".4"/>`,
+
+  market:
+    `<path d="M24 40h52l-6 48H30z"/>
+     <path d="M39 48V28a9 9 0 0 1 18 0v20"/>
+     <circle cx="43" cy="66" r="7" opacity=".6"/>
+     <circle cx="59" cy="72" r="6" opacity=".6"/>
+     <path d="M12 88h76" opacity=".4"/>`,
+
+  transport:
+    `<rect x="26" y="14" width="48" height="46" rx="11"/>
+     <path d="M26 38h48"/>
+     <circle cx="39" cy="49" r="3.5"/><circle cx="61" cy="49" r="3.5"/>
+     <path d="M34 60 24 84M66 60l10 24"/>
+     <path d="M10 88h80" opacity=".4"/>
+     <path d="M36 24h28" opacity=".55"/>`,
+
+  house:
+    `<path d="M14 50 50 22l36 28"/>
+     <path d="M22 46v42h56V46"/>
+     <path d="M41 88V66h18v22"/>
+     <path d="M31 56h12v12H31z" opacity=".6"/>
+     <path d="M63 56h10v12H63z" opacity=".6"/>
+     <path d="M6 88h88"/>`
+};
+
+/** Build the SVG for a category scene. */
+export function scene(name) {
+  const body = SCENES[name] ?? SCENES.house;
+  return `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice"
+    fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+    stroke-linejoin="round" aria-hidden="true" focusable="false">${body}</svg>`;
+}

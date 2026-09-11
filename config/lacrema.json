@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "updated": "2026-09-10",
+  "updated": "2026-09-11",
   "property": {
     "name": "B&B Lacrêma",
     "tagline": {
@@ -35,12 +35,13 @@
     }
   },
   "wifi": {
+    "open": true,
     "ssid": "DA_COMPLETARE",
-    "password": "DA_COMPLETARE",
+    "password": null,
     "note": {
-      "it": "Copre tutta la casa, il giardino e la terrazza.",
-      "en": "Covers the whole house, the garden and the terrace.",
-      "de": "Deckt das ganze Haus, den Garten und die Terrasse ab."
+      "it": "Rete aperta: non serve nessuna password. Copre casa, giardino e terrazza.",
+      "en": "Open network: no password needed. Covers the house, garden and terrace.",
+      "de": "Offenes Netz: kein Passwort nötig. Deckt Haus, Garten und Terrasse ab."
     }
   },
   "travelNote": {
@@ -79,9 +80,9 @@
             "de": "Späte Anreise"
           },
           "val": {
-            "it": "DA_COMPLETARE — cosa fare se si arriva dopo le 16.",
-            "en": "TO BE COMPLETED",
-            "de": "ZU ERGÄNZEN"
+            "it": "Chiama Mario: si organizza per aspettarti. Avvisalo appena sai l'orario, non quando sei già in viaggio.",
+            "en": "Call Mario — he will wait for you. Let him know as soon as you have a time, not once you are already travelling.",
+            "de": "Rufen Sie Mario an, er wartet auf Sie. Bitte melden Sie sich, sobald die Ankunftszeit feststeht."
           }
         },
         {
@@ -111,14 +112,65 @@
       ]
     },
     {
-      "id": "wifi",
-      "icon": "wifi",
+      "id": "checkout",
+      "icon": "suitcase",
       "label": {
-        "it": "Wi-Fi",
-        "en": "Wi-Fi",
-        "de": "WLAN"
+        "it": "Check-out",
+        "en": "Check-out",
+        "de": "Check-out"
       },
-      "type": "wifi"
+      "type": "rows",
+      "rows": [
+        {
+          "key": {
+            "it": "Orario",
+            "en": "Time",
+            "de": "Uhrzeit"
+          },
+          "val": {
+            "it": "Entro le 10:00",
+            "en": "By 10:00",
+            "de": "Bis 10:00"
+          },
+          "big": true
+        },
+        {
+          "key": {
+            "it": "Chiavi",
+            "en": "Keys",
+            "de": "Schlüssel"
+          },
+          "val": {
+            "it": "DA_COMPLETARE — dove lasciarle.",
+            "en": "TO BE COMPLETED",
+            "de": "ZU ERGÄNZEN"
+          }
+        },
+        {
+          "key": {
+            "it": "Bagagli",
+            "en": "Luggage",
+            "de": "Gepäck"
+          },
+          "val": {
+            "it": "DA_COMPLETARE — si possono lasciare dopo il check-out?",
+            "en": "TO BE COMPLETED — can bags be left after check-out?",
+            "de": "ZU ERGÄNZEN — Gepäckaufbewahrung nach dem Check-out?"
+          }
+        },
+        {
+          "key": {
+            "it": "Prima di andare",
+            "en": "Before you go",
+            "de": "Vor der Abreise"
+          },
+          "val": {
+            "it": "Se ti sei trovato bene, una recensione aiuta più di quanto immagini una casa piccola come questa.",
+            "en": "If you enjoyed your stay, a review helps a small house like this more than you'd think.",
+            "de": "Wenn es Ihnen gefallen hat: Eine Bewertung hilft einem kleinen Haus wie diesem sehr."
+          }
+        }
+      ]
     },
     {
       "id": "rules",
@@ -217,6 +269,17 @@
       ]
     },
     {
+      "id": "wifi",
+      "icon": "wifi",
+      "label": {
+        "it": "Wi-Fi",
+        "en": "Wi-Fi",
+        "de": "WLAN"
+      },
+      "type": "wifi",
+      "scene": "house"
+    },
+    {
       "id": "services",
       "icon": "sofa",
       "label": {
@@ -226,6 +289,19 @@
       },
       "type": "amenities",
       "items": [
+        {
+          "icon": "clock",
+          "label": {
+            "it": "Colazione",
+            "en": "Breakfast",
+            "de": "Frühstück"
+          },
+          "detail": {
+            "it": "Dalle 8:00 alle 10:00. Dolce e salato. Avvisa la sera prima se hai intolleranze o preferenze.",
+            "en": "From 8:00 to 10:00. Sweet and savoury. Let Mario know the night before about any dietary needs.",
+            "de": "Von 8:00 bis 10:00. Süß und herzhaft. Bitte am Vorabend Bescheid geben bei Unverträglichkeiten."
+          }
+        },
         {
           "icon": "water",
           "label": {
@@ -289,19 +365,6 @@
             "it": "Lavanderia e lavaggio a secco. DA_COMPLETARE — tempi e costi.",
             "en": "Laundry and dry cleaning. TO BE COMPLETED — turnaround and cost.",
             "de": "Wäscherei und chemische Reinigung. ZU ERGÄNZEN — Dauer und Kosten."
-          }
-        },
-        {
-          "icon": "clock",
-          "label": {
-            "it": "Colazione",
-            "en": "Breakfast",
-            "de": "Frühstück"
-          },
-          "detail": {
-            "it": "DA_COMPLETARE — orario e dove viene servita. Dolce e salato; avvisa la sera prima per intolleranze.",
-            "en": "TO BE COMPLETED — time and where it is served.",
-            "de": "ZU ERGÄNZEN — Uhrzeit und Ort."
           }
         }
       ]
@@ -383,12 +446,12 @@
             44.1690486,
             8.3405867
           ],
-          "walkMin": 40,
+          "walkMin": 46,
           "driveMin": 8,
-          "phone": null,
+          "scene": "transport",
           "photo": null,
           "note": {
-            "it": "Linea Genova–Ventimiglia. Regionali frequenti verso Savona e Albenga, Intercity per Milano e Roma.",
+            "it": "Linea Genova–Ventimiglia. Regionali frequenti per Savona e Albenga, Intercity per Milano e Roma.",
             "en": "Genoa–Ventimiglia line. Frequent regional trains to Savona and Albenga, Intercity to Milan and Rome.",
             "de": "Strecke Genua–Ventimiglia. Regionalzüge nach Savona und Albenga, Intercity nach Mailand und Rom."
           }
@@ -399,10 +462,11 @@
           "walkMin": null,
           "driveMin": null,
           "phone": "+393936444444",
+          "scene": "transport",
           "photo": null,
           "note": {
-            "it": "Attivo 24 ore su 24. Risponde anche su WhatsApp. Per risalire la sera è la soluzione più semplice.",
-            "en": "Open 24 hours, also reachable on WhatsApp. The simplest way back up the hill at night.",
+            "it": "Attivo 24 ore su 24, anche su WhatsApp. Per risalire in collina la sera è la soluzione più semplice.",
+            "en": "Open 24 hours, also on WhatsApp. The simplest way back up the hill at night.",
             "de": "Rund um die Uhr, auch über WhatsApp. Abends der einfachste Weg zurück den Hang hinauf."
           }
         },
@@ -412,24 +476,12 @@
           "walkMin": null,
           "driveMin": null,
           "phone": "+393936252525",
+          "scene": "transport",
           "photo": null,
           "note": {
-            "it": "Via San Francesco 36. Anche minibus da nove posti e transfer per gli aeroporti di Genova e Nizza.",
-            "en": "Via San Francesco 36. Nine-seat minibus and transfers to Genoa and Nice airports.",
-            "de": "Via San Francesco 36. Auch Neunsitzer-Minibus und Transfers zu den Flughäfen Genua und Nizza."
-          }
-        },
-        {
-          "name": "DA_COMPLETARE — fermata bus",
-          "coords": null,
-          "walkMin": null,
-          "driveMin": null,
-          "phone": null,
-          "photo": null,
-          "note": {
-            "it": "La fermata TPL più vicina alla casa e la linea che scende in Marina.",
-            "en": "The nearest bus stop and the line down to the seafront.",
-            "de": "Nächste Bushaltestelle und Linie hinunter zur Promenade."
+            "it": "Via San Francesco 36. Anche minibus da nove posti e transfer per Genova e Nizza.",
+            "en": "Via San Francesco 36. Nine-seat minibus and transfers to Genoa and Nice.",
+            "de": "Via San Francesco 36. Neunsitzer-Minibus und Transfers nach Genua und Nizza."
           }
         }
       ]
@@ -468,7 +520,8 @@
             "it": "DA_COMPLETARE — il commento di Mario. È il più vicino a casa, sempre in collina.",
             "en": "TO BE COMPLETED — Mario's note. The closest one, also on the hillside.",
             "de": "ZU ERGÄNZEN — Marios Hinweis. Das nächstgelegene, ebenfalls am Hang."
-          }
+          },
+          "scene": "table"
         },
         {
           "name": "Osteria Grotesque",
@@ -485,7 +538,8 @@
             "it": "DA_COMPLETARE — in centro, pochi coperti, meglio prenotare.",
             "en": "TO BE COMPLETED — in town, few tables, better to book.",
             "de": "ZU ERGÄNZEN — im Zentrum, wenige Plätze, besser reservieren."
-          }
+          },
+          "scene": "table"
         },
         {
           "name": "Antica Osteria (Perti Alto)",
@@ -506,7 +560,8 @@
             "it": "DA_COMPLETARE — terrazza panoramica sopra Finalborgo.",
             "en": "TO BE COMPLETED — panoramic terrace above Finalborgo.",
             "de": "ZU ERGÄNZEN — Panoramaterrasse über Finalborgo."
-          }
+          },
+          "scene": "table"
         },
         {
           "name": "Alla Vecchia Maniera",
@@ -523,7 +578,8 @@
             "it": "DA_COMPLETARE — pesce, in Via Roma.",
             "en": "TO BE COMPLETED — seafood, on Via Roma.",
             "de": "ZU ERGÄNZEN — Fisch, in der Via Roma."
-          }
+          },
+          "scene": "table"
         }
       ]
     },
@@ -538,18 +594,116 @@
       "type": "places",
       "places": [
         {
-          "name": "DA_COMPLETARE",
-          "coords": null,
-          "walkMin": null,
-          "driveMin": null,
+          "name": "DOLCE",
+          "coords": [
+            44.1692298,
+            8.3443445
+          ],
+          "walkMin": 43,
+          "driveMin": 8,
+          "phone": "+393928038576",
+          "closed": {
+            "it": "lunedì",
+            "en": "Monday",
+            "de": "Montag"
+          },
+          "scene": "aperitivo",
           "photo": null,
           "note": {
-            "it": "Due o tre posti per l'aperitivo, scelti da Mario. Uno sul mare e uno a Finalborgo coprono quasi tutte le richieste.",
-            "en": "Two or three aperitivo spots chosen by Mario — one by the sea and one in Finalborgo cover most requests.",
-            "de": "Zwei oder drei Aperitif-Adressen von Mario — eine am Meer, eine in Finalborgo."
+            "it": "Via Garibaldi 75. Cocktail classici fatti bene e prezzi onesti: è il posto dove va la gente del luogo.",
+            "en": "Via Garibaldi 75. Classic cocktails done properly at fair prices — where locals actually go.",
+            "de": "Via Garibaldi 75. Klassische Cocktails, fair bepreist — hier geht man vor Ort hin."
+          }
+        },
+        {
+          "name": "Bar Milano",
+          "coords": [
+            44.168863,
+            8.3426154
+          ],
+          "walkMin": 45,
+          "driveMin": 8,
+          "phone": "+393462225468",
+          "scene": "aperitivo",
+          "photo": null,
+          "note": {
+            "it": "Via Bolla 1. Dalle 7 del mattino a mezzanotte. L'aperitivo arriva con un piatto generoso: spesso sostituisce la cena.",
+            "en": "Via Bolla 1. From 7am to midnight. The aperitivo comes with a generous plate — often it replaces dinner.",
+            "de": "Via Bolla 1. Von 7 Uhr bis Mitternacht. Zum Aperitif kommt ein großzügiger Teller."
+          }
+        },
+        {
+          "name": "Tabù Finalborgo",
+          "coords": [
+            44.175886,
+            8.3278244
+          ],
+          "walkMin": 49,
+          "driveMin": 9,
+          "phone": "+393355466365",
+          "closed": {
+            "it": "mercoledì",
+            "en": "Wednesday",
+            "de": "Mittwoch"
+          },
+          "scene": "aperitivo",
+          "photo": null,
+          "note": {
+            "it": "Via Gallesio 13, dentro le mura. Atmosfera swing, cocktail curati. Chiuso il mercoledì.",
+            "en": "Via Gallesio 13, inside the walls. Swing atmosphere, carefully made cocktails. Closed Wednesday.",
+            "de": "Via Gallesio 13, in der Altstadt. Swing-Atmosphäre, sorgfältige Cocktails. Mittwoch Ruhetag."
+          }
+        },
+        {
+          "name": "La Bottega Cafe",
+          "coords": [
+            44.1762579,
+            8.326426
+          ],
+          "walkMin": 51,
+          "driveMin": 9,
+          "phone": "+39019204 0623",
+          "closed": {
+            "it": "giovedì",
+            "en": "Thursday",
+            "de": "Donnerstag"
+          },
+          "scene": "aperitivo",
+          "photo": null,
+          "note": {
+            "it": "Piazza del Tribunale 7. Piccolo, con un cortile interno nascosto. Apre alle 17. Chiuso il giovedì.",
+            "en": "Piazza del Tribunale 7. Small, with a hidden inner courtyard. Opens at 5pm. Closed Thursday.",
+            "de": "Piazza del Tribunale 7. Klein, mit verstecktem Innenhof. Ab 17 Uhr. Donnerstag Ruhetag."
+          }
+        },
+        {
+          "name": "Luma Caffè Vino",
+          "coords": [
+            44.1763782,
+            8.3273883
+          ],
+          "walkMin": 49,
+          "driveMin": 9,
+          "phone": "+393333126376",
+          "closed": {
+            "it": "mercoledì",
+            "en": "Wednesday",
+            "de": "Mittwoch"
+          },
+          "scene": "aperitivo",
+          "photo": null,
+          "note": {
+            "it": "Piazza Garibaldi 2, sotto il castello. Vini liguri e prodotti locali, dal caffè del mattino all'aperitivo. Chiuso il mercoledì.",
+            "en": "Piazza Garibaldi 2, below the castle. Ligurian wines and local produce, from morning coffee to aperitivo. Closed Wednesday.",
+            "de": "Piazza Garibaldi 2, unter der Burg. Ligurische Weine und lokale Produkte. Mittwoch Ruhetag."
           }
         }
-      ]
+      ],
+      "intro": {
+        "it": "Cinque indirizzi scelti tra i meglio giudicati della zona: due in Marina, tre a Finalborgo.",
+        "en": "Five addresses among the best regarded locally: two by the sea, three in Finalborgo.",
+        "de": "Fünf Adressen aus den bestbewerteten der Gegend: zwei am Meer, drei in Finalborgo."
+      }
     },
     {
       "id": "shopping",
@@ -561,21 +715,73 @@
       },
       "type": "places",
       "intro": {
-        "it": "Dopo il wifi, è la domanda più frequente.",
-        "en": "After the Wi-Fi, this is the most frequent question.",
-        "de": "Nach dem WLAN die häufigste Frage."
+        "it": "Il più vicino è il Penny di Corso Europa: sta proprio sotto casa, in verticale. Gli altri sono in Marina o a Finalborgo.",
+        "en": "The closest is the Penny on Corso Europa, straight downhill from the house. The others are in the Marina or Finalborgo.",
+        "de": "Am nächsten liegt der Penny an der Corso Europa, direkt unterhalb des Hauses. Die anderen liegen in der Marina oder in Finalborgo."
       },
       "places": [
         {
-          "name": "DA_COMPLETARE — supermercato più vicino",
-          "coords": null,
-          "walkMin": null,
-          "driveMin": null,
+          "name": "Penny — Corso Europa",
+          "coords": [
+            44.171555,
+            8.354891
+          ],
+          "walkMin": 35,
+          "driveMin": 6,
+          "scene": "market",
           "photo": null,
           "note": {
-            "it": "Nome, orario e se è aperto la domenica. Aggiungi anche il forno e il mercato settimanale.",
-            "en": "Name, hours, and whether it opens on Sunday. Add the bakery and the weekly market too.",
-            "de": "Name, Öffnungszeiten, sonntags geöffnet? Auch Bäckerei und Wochenmarkt ergänzen."
+            "it": "Corso Europa 55. Il più vicino in assoluto. Aperto 8:00–20:30 tutti i giorni, domenica compresa.",
+            "en": "Corso Europa 55. By far the closest. Open 8:00–20:30 every day, Sunday included.",
+            "de": "Corso Europa 55. Mit Abstand am nächsten. Täglich 8:00–20:30, auch sonntags."
+          }
+        },
+        {
+          "name": "Coop — Viale Dante",
+          "coords": [
+            44.1712028,
+            8.3347459
+          ],
+          "walkMin": 47,
+          "driveMin": 8,
+          "scene": "market",
+          "photo": null,
+          "note": {
+            "it": "Il più fornito, con un buon banco del pesce e i prodotti liguri. Aperto tutti i giorni, la domenica dalle 8.",
+            "en": "The best stocked, with a good fish counter and Ligurian produce. Open daily, Sundays from 8am.",
+            "de": "Am besten sortiert, mit gutem Fischstand und ligurischen Produkten. Täglich, sonntags ab 8 Uhr."
+          }
+        },
+        {
+          "name": "Carrefour Express",
+          "coords": [
+            44.1705343,
+            8.3475637
+          ],
+          "walkMin": 39,
+          "driveMin": 7,
+          "scene": "market",
+          "photo": null,
+          "note": {
+            "it": "Via Alonzo 10, a cinque minuti dalla spiaggia. Piccolo, ma è quello giusto per la spesa al volo. Fino alle 21.",
+            "en": "Via Alonzo 10, five minutes from the beach. Small, but the right one for a quick top-up. Until 9pm.",
+            "de": "Via Alonzo 10, fünf Minuten vom Strand. Klein, aber ideal für den schnellen Einkauf. Bis 21 Uhr."
+          }
+        },
+        {
+          "name": "FUDI — Finalborgo",
+          "coords": [
+            44.1758013,
+            8.3241589
+          ],
+          "walkMin": 54,
+          "driveMin": 9,
+          "scene": "market",
+          "photo": null,
+          "note": {
+            "it": "Via per Calice 14. Grande, con parcheggio proprio e un buon reparto forno. Domenica aperto mattina e pomeriggio.",
+            "en": "Via per Calice 14. Large, with its own car park and a good bakery counter.",
+            "de": "Via per Calice 14. Groß, mit eigenem Parkplatz und guter Backwarenabteilung."
           }
         }
       ]
@@ -596,12 +802,13 @@
             44.1674163,
             8.3423057
           ],
-          "walkMin": 43,
+          "walkMin": 48,
           "driveMin": 8,
+          "scene": "sea",
           "photo": null,
           "note": {
-            "it": "Sul lungomare Migliorini. Libera, con servizi.",
-            "en": "On the Migliorini seafront. Free access, with facilities.",
+            "it": "Sul lungomare Migliorini. Libera, con servizi: la scelta più semplice se scendi a piedi o in bus.",
+            "en": "On the Migliorini seafront. Free access with facilities — the simplest option on foot or by bus.",
             "de": "An der Promenade Migliorini. Frei zugänglich, mit Einrichtungen."
           }
         },
@@ -611,26 +818,47 @@
             44.168276,
             8.3438705
           ],
-          "walkMin": 41,
+          "walkMin": 45,
           "driveMin": 8,
           "phone": "+393802030500",
+          "scene": "sea",
           "photo": null,
           "note": {
-            "it": "Stabilimento con noleggio SUP e kayak. In alta stagione si prenota con qualche giorno di anticipo.",
+            "it": "Stabilimento con noleggio SUP e kayak. In alta stagione conviene prenotare qualche giorno prima.",
             "en": "Beach club with SUP and kayak rental. In high season, book a few days ahead.",
-            "de": "Strandbad mit SUP- und Kajakverleih. In der Hochsaison einige Tage vorher buchen."
+            "de": "Strandbad mit SUP- und Kajakverleih. In der Hochsaison vorher buchen."
           }
         },
         {
-          "name": "DA_COMPLETARE — la baia di Mario",
-          "coords": null,
-          "walkMin": null,
-          "driveMin": null,
+          "name": "Baia dei Saraceni",
+          "coords": [
+            44.1852986,
+            8.4071575
+          ],
+          "walkMin": 80,
+          "driveMin": 14,
+          "scene": "sea",
           "photo": null,
           "note": {
-            "it": "Il posto meno affollato che conosce lui. È questo che un ospite non trova su Google.",
-            "en": "The least crowded spot he knows — the one a guest can't find on Google.",
-            "de": "Die ruhigste Stelle, die er kennt — die man bei Google nicht findet."
+            "it": "Varigotti. La baia più bella del tratto, tra due promontori. Nei weekend d'estate è piena e il parcheggio è un problema: vacci in settimana, o presto.",
+            "en": "Varigotti. The finest bay on this stretch, between two headlands. Packed at summer weekends and parking is a problem — go midweek, or early.",
+            "de": "Varigotti. Die schönste Bucht der Küste. An Sommerwochenenden überfüllt — besser unter der Woche oder früh."
+          }
+        },
+        {
+          "name": "Spiaggia di Varigotti",
+          "coords": [
+            44.1826,
+            8.3988
+          ],
+          "walkMin": 68,
+          "driveMin": 12,
+          "scene": "sea",
+          "photo": null,
+          "note": {
+            "it": "Sabbia chiara davanti alle case colorate. Più larga e più tranquilla della Baia, e più facile da raggiungere.",
+            "en": "Pale sand in front of the coloured houses. Wider and calmer than the bay, and easier to reach.",
+            "de": "Heller Sand vor den bunten Häusern. Breiter und ruhiger als die Bucht."
           }
         }
       ]
@@ -645,33 +873,89 @@
       },
       "type": "places",
       "intro": {
-        "it": "Finale è una delle capitali europee della mountain bike. Mario noleggia le bici: i percorsi partono da qui.",
-        "en": "Finale is one of Europe's mountain-biking capitals. Mario rents bikes, and the trails start from the house.",
-        "de": "Finale ist eine der europäischen MTB-Hochburgen. Mario vermietet Räder; die Touren starten am Haus."
+        "it": "Finale è una delle capitali europee della mountain bike e i sentieri partono da dietro casa. Cinque percorsi, dal più facile al più impegnativo. Mario noleggia le bici.",
+        "en": "Finale is one of Europe's mountain-biking capitals and the trails start behind the house. Five routes, easiest first. Mario rents bikes.",
+        "de": "Finale ist eine europäische MTB-Hochburg, die Wege beginnen hinter dem Haus. Fünf Routen, von leicht nach schwer. Mario vermietet Räder."
       },
       "places": [
         {
-          "name": "DA_COMPLETARE — il giro consigliato",
-          "coords": null,
-          "walkMin": null,
-          "driveMin": null,
+          "name": "Sentiero del Pellegrino",
+          "coords": [
+            44.1854814,
+            8.4063403
+          ],
+          "walkMin": 79,
+          "driveMin": 14,
+          "scene": "trail",
           "photo": null,
           "note": {
-            "it": "Un percorso facile e uno impegnativo che partono dalla casa, con dislivello e durata.",
-            "en": "One easy and one demanding route starting from the house, with elevation and duration.",
-            "de": "Eine leichte und eine anspruchsvolle Route ab Haus, mit Höhenmetern und Dauer."
+            "it": "Da Varigotti verso Noli, a picco sul mare. Si passa dalla chiesetta di San Lorenzo con vista sulla Baia dei Saraceni, poi la Torre delle Streghe. Circa 2 ore e mezza, andata e ritorno in bus.",
+            "en": "From Varigotti towards Noli, high above the sea. Past the little church of San Lorenzo overlooking Baia dei Saraceni, then the Witches' Tower. About 2.5 hours; return by bus.",
+            "de": "Von Varigotti Richtung Noli, hoch über dem Meer. Vorbei an San Lorenzo mit Blick auf die Baia dei Saraceni. Etwa 2,5 Stunden; Rückweg mit dem Bus."
           }
         },
         {
-          "name": "DA_COMPLETARE — sentiero a piedi",
-          "coords": null,
-          "walkMin": null,
-          "driveMin": null,
+          "name": "Ponti Romani della Val Ponci",
+          "coords": [
+            44.2172843,
+            8.3707338
+          ],
+          "walkMin": 67,
+          "driveMin": 12,
+          "scene": "trail",
           "photo": null,
           "note": {
-            "it": "La camminata più bella raggiungibile senza auto.",
-            "en": "The best walk you can reach without a car.",
-            "de": "Der schönste Spaziergang ohne Auto."
+            "it": "Cinque ponti della via Julia Augusta nel bosco, quasi in piano. È la camminata giusta con bambini o in una giornata calda.",
+            "en": "Five bridges of the Roman via Julia Augusta in the woods, nearly flat. The right walk with children or on a hot day.",
+            "de": "Fünf römische Brücken der Via Julia Augusta im Wald, fast eben. Ideal mit Kindern oder an heißen Tagen."
+          }
+        },
+        {
+          "name": "Anello di Capo Noli",
+          "coords": [
+            44.1938048,
+            8.4007772
+          ],
+          "walkMin": 72,
+          "driveMin": 13,
+          "scene": "trail",
+          "photo": null,
+          "note": {
+            "it": "Da Varigotti all'altopiano delle Manie e ritorno per Noli: circa 10 km e 4 ore. Il giro più bello del Finalese, panoramico quasi ovunque.",
+            "en": "From Varigotti to the Manie plateau and back via Noli: about 10 km, 4 hours. The finest loop in the Finalese.",
+            "de": "Von Varigotti zum Plateau delle Manie und über Noli zurück: rund 10 km, 4 Stunden. Die schönste Runde der Gegend."
+          }
+        },
+        {
+          "name": "Grotta dei Falsari",
+          "coords": [
+            44.1931934,
+            8.4219798
+          ],
+          "walkMin": 104,
+          "driveMin": 18,
+          "scene": "trail",
+          "photo": null,
+          "note": {
+            "it": "Una grotta aperta sul mare, sotto Capo Noli. Si arriva con una deviazione dal Sentiero del Pellegrino. Non è per chi soffre l'esposizione.",
+            "en": "A cave open to the sea below Capo Noli, reached by a detour from the Pilgrim's Path. Not for anyone uneasy with exposure.",
+            "de": "Eine zum Meer offene Höhle unter Capo Noli. Abzweig vom Pilgerweg. Nichts für Schwindelanfällige."
+          }
+        },
+        {
+          "name": "Monte Caprazoppa",
+          "coords": [
+            44.1703,
+            8.3181
+          ],
+          "walkMin": 68,
+          "driveMin": 12,
+          "scene": "trail",
+          "photo": null,
+          "note": {
+            "it": "Anello di 9 km da Finalborgo, con salita decisa e vista che va da Capo Noli ad Albenga. Il più impegnativo dei cinque.",
+            "en": "A 9 km loop from Finalborgo, with a steady climb and views from Capo Noli to Albenga. The hardest of the five.",
+            "de": "9-km-Runde ab Finalborgo, kräftiger Anstieg, Blick von Capo Noli bis Albenga. Die anspruchsvollste der fünf."
           }
         }
       ]
@@ -692,89 +976,92 @@
             44.1743048,
             8.3294959
           ],
-          "walkMin": 43,
-          "driveMin": 8,
+          "walkMin": 49,
+          "driveMin": 9,
+          "scene": "village",
           "photo": null,
           "note": {
-            "it": "Borgo medievale cinto da mura, tra i Borghi più belli d'Italia. Bello la sera, quando i pullman sono andati via.",
+            "it": "Borgo medievale cinto da mura, tra i Borghi più belli d'Italia. Il momento giusto è la sera, quando i pullman sono ripartiti.",
             "en": "A walled medieval village, among Italy's finest. Best in the evening, once the coaches have left.",
             "de": "Mittelalterliches Städtchen mit Mauerring. Am schönsten abends, wenn die Busse weg sind."
           }
         },
         {
-          "name": "DA_COMPLETARE — Varigotti",
-          "coords": null,
-          "walkMin": null,
-          "driveMin": null,
+          "name": "Museo Archeologico del Finale",
+          "coords": [
+            44.1758304,
+            8.3263107
+          ],
+          "walkMin": 51,
+          "driveMin": 9,
+          "phone": "+39019690020",
+          "closed": {
+            "it": "lunedì",
+            "en": "Monday",
+            "de": "Montag"
+          },
+          "scene": "village",
           "photo": null,
           "note": {
-            "it": "Le case colorate sul mare, pochi minuti in auto verso levante.",
-            "en": "The coloured houses on the water, a few minutes east by car.",
-            "de": "Die bunten Häuser am Wasser, wenige Autominuten östlich."
+            "it": "Nei chiostri di Santa Caterina, a Finalborgo. Racconta il Finalese dal paleolitico al medioevo. Audioguida in più lingue, un'ora scarsa. Chiuso il lunedì.",
+            "en": "In the cloisters of Santa Caterina. The Finalese from the Palaeolithic to the Middle Ages. Multilingual audio guide, under an hour. Closed Monday.",
+            "de": "In den Kreuzgängen von Santa Caterina. Vom Paläolithikum bis ins Mittelalter. Mehrsprachiger Audioguide. Montag geschlossen."
+          }
+        },
+        {
+          "name": "Castel Gavone",
+          "coords": [
+            44.1814692,
+            8.3200407
+          ],
+          "walkMin": 56,
+          "driveMin": 10,
+          "scene": "village",
+          "photo": null,
+          "note": {
+            "it": "Sopra Finalborgo, mezz'ora di salita. L'interno è spesso chiuso, ma la Torre dei Diamanti e il panorama valgono il cammino. D'estate ci sono visite serali.",
+            "en": "Above Finalborgo, half an hour uphill. Often closed inside, but the Diamond Tower and the view are worth the walk. Evening tours in summer.",
+            "de": "Oberhalb von Finalborgo, eine halbe Stunde bergauf. Innen oft geschlossen, doch Turm und Aussicht lohnen den Weg."
+          }
+        },
+        {
+          "name": "Varigotti",
+          "coords": [
+            44.1826,
+            8.3988
+          ],
+          "walkMin": 68,
+          "driveMin": 12,
+          "scene": "village",
+          "photo": null,
+          "note": {
+            "it": "Le case colorate sull'acqua, a dieci minuti in auto verso levante. Il borgo saraceno si gira a piedi in mezz'ora.",
+            "en": "The coloured houses on the water, ten minutes east by car. The old quarter takes half an hour on foot.",
+            "de": "Die bunten Häuser am Wasser, zehn Autominuten östlich. Der alte Kern ist in einer halben Stunde erkundet."
+          }
+        },
+        {
+          "name": "Borgio Verezzi",
+          "coords": [
+            44.1678952,
+            8.3110239
+          ],
+          "walkMin": 80,
+          "driveMin": 14,
+          "scene": "village",
+          "photo": null,
+          "note": {
+            "it": "Quattro borgate di pietra affacciate sul golfo. Piazza Sant'Agostino d'estate diventa un teatro all'aperto.",
+            "en": "Four stone hamlets above the gulf. In summer, Piazza Sant'Agostino becomes an open-air theatre.",
+            "de": "Vier Steinweiler über dem Golf. Im Sommer wird die Piazza Sant'Agostino zur Freilichtbühne."
           }
         }
-      ]
-    },
-    {
-      "id": "checkout",
-      "icon": "suitcase",
-      "label": {
-        "it": "Check-out",
-        "en": "Check-out",
-        "de": "Check-out"
-      },
-      "type": "rows",
-      "rows": [
-        {
-          "key": {
-            "it": "Orario",
-            "en": "Time",
-            "de": "Uhrzeit"
-          },
-          "val": {
-            "it": "Entro le 10:00",
-            "en": "By 10:00",
-            "de": "Bis 10:00"
-          },
-          "big": true
-        },
-        {
-          "key": {
-            "it": "Chiavi",
-            "en": "Keys",
-            "de": "Schlüssel"
-          },
-          "val": {
-            "it": "DA_COMPLETARE — dove lasciarle.",
-            "en": "TO BE COMPLETED",
-            "de": "ZU ERGÄNZEN"
-          }
-        },
-        {
-          "key": {
-            "it": "Bagagli",
-            "en": "Luggage",
-            "de": "Gepäck"
-          },
-          "val": {
-            "it": "DA_COMPLETARE — si possono lasciare dopo il check-out?",
-            "en": "TO BE COMPLETED — can bags be left after check-out?",
-            "de": "ZU ERGÄNZEN — Gepäckaufbewahrung nach dem Check-out?"
-          }
-        },
-        {
-          "key": {
-            "it": "Prima di andare",
-            "en": "Before you go",
-            "de": "Vor der Abreise"
-          },
-          "val": {
-            "it": "Se ti sei trovato bene, una recensione aiuta più di quanto immagini una casa piccola come questa.",
-            "en": "If you enjoyed your stay, a review helps a small house like this more than you'd think.",
-            "de": "Wenn es Ihnen gefallen hat: Eine Bewertung hilft einem kleinen Haus wie diesem sehr."
-          }
-        }
-      ]
+      ],
+      "intro": {
+        "it": "Le cose che vale la pena vedere, in ordine di vicinanza.",
+        "en": "What is worth seeing, nearest first.",
+        "de": "Sehenswertes, nach Entfernung geordnet."
+      }
     },
     {
       "id": "emergency",

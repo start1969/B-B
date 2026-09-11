@@ -1,5 +1,5 @@
 import { UI, LANGUAGE_NAMES, detectLanguage, pick } from "./i18n.js";
-import { icon } from "./icons.js";
+import { icon, scene } from "./icons.js";
 
 const CONFIG_URL = "config/lacrema.json";
 const PLACEHOLDER = /^(DA_COMPLETARE|DA_VERIFICARE|TO BE COMPLETED|TO VERIFY|ZU ERGÄNZEN|ZU PRÜFEN)/i;
@@ -62,7 +62,8 @@ const map = (c) => (c ? `https://www.google.com/maps/search/?api=1&query=${c[0]}
 
 function wifiCard() {
   const { wifi } = config;
-  const rows = ["ssid", "password"].map((k) => {
+  const keys = wifi.open ? ["ssid"] : ["ssid", "password"];
+  const rows = keys.map((k) => {
     const gone = missing(wifi[k]);
     return `
       <div class="wifi__row">
@@ -78,6 +79,7 @@ function wifiCard() {
     <div class="wifi">
       <p class="wifi__label">${esc(t.wifi.label)}</p>
       ${rows}
+      ${wifi.open ? `<p class="wifi__open">${icon("wifi", 18)} ${esc(t.wifi.openLabel)}</p>` : ""}
       <p class="wifi__note">${val(wifi.note)}</p>
     </div>`;
 }
@@ -178,8 +180,11 @@ const TYPES = {
   places: (s) => {
     const items = s.places
       .map((p) => {
+        // Over an hour on foot is not a walk anybody makes: showing it as an
+        // option is noise, so only the driving time is offered.
+        const walkable = p.walkMin && p.walkMin <= 60;
         const times = [
-          p.walkMin ? `${p.walkMin} min ${esc(t.walk)}` : "",
+          walkable ? `${p.walkMin} min ${esc(t.walk)}` : "",
           p.driveMin ? `${p.driveMin} min ${esc(t.drive)}` : ""
         ]
           .filter(Boolean)
@@ -194,7 +199,7 @@ const TYPES = {
 
         const media = p.photo
           ? `<img class="place__photo" src="${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy">`
-          : `<div class="place__photo place__photo--empty">${icon("camera", 20)}<span>${esc(t.photoMissing)}</span></div>`;
+          : `<div class="place__photo place__photo--scene">${scene(p.scene ?? s.scene ?? "house")}</div>`;
 
         return `
           <li class="place">

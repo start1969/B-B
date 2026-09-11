@@ -434,6 +434,30 @@ body.is-home .masthead { display: none; }
   background: var(--glass);
 }
 
+.place__photo--scene {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  background: rgba(20, 17, 11, 0.55);
+  border: 1px solid var(--edge);
+  overflow: hidden;
+}
+
+.place__photo--scene svg { width: 100%; height: 100%; opacity: 0.85; }
+
+.wifi__open {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin: var(--s-4) 0 0;
+  padding: var(--s-3) var(--s-4);
+  background: rgba(36, 31, 21, 0.14);
+  border-radius: 8px;
+  font-size: var(--t-sm);
+  font-weight: 600;
+}
+
 .place__photo--empty {
   display: flex;
   flex-direction: column;

@@ -63,10 +63,28 @@ over it. Drop either and the home falls back to a plain dark panel.
 ### Distances
 
 Places carry `walkMin` and `driveMin`, not kilometres. "1.5 km" tells a guest
-nothing; "26 minutes on foot, 5 by car" tells them whether to walk. Because the
-house sits on the hillside, every section that shows times also shows a standing
-note that the return leg is uphill. The current values are estimates from
-straight-line distance and need checking on the ground.
+nothing; "26 minutes on foot, 5 by car" tells them whether to walk. Anything over
+an hour on foot is hidden: nobody walks to a trailhead in Varigotti, and offering
+it as an option is noise. Because the house sits on the hillside, every section
+that shows times also carries a note that the return leg is uphill.
+
+The values are estimated from straight-line distance with a road factor, and need
+checking on the ground.
+
+### Category artwork instead of photographs
+
+Photographs of businesses on the web belong to their owners: Google Maps images
+are licensed for use inside Google's own maps, and a restaurant's own pictures
+are its property. Copying either into a public MIT-licensed repository would
+expose the host, so this project does not ship them.
+
+Instead, every place without a photograph shows a drawn scene for its category —
+sea, trail, village, table, aperitivo, market, transport, house — in the same
+line language as the icons, defined in `assets/js/icons.js` as `SCENES`. A place
+picks one with its `scene` field, or inherits the section's.
+
+Set a place's `photo` field to replace its scene with a real picture. The right
+pictures are the ones the host takes himself.
 
 ### Fields still to be filled in
 
@@ -157,6 +175,17 @@ a tired guest, at night, with the screen dimmed.
 
 Fonts load from Google Fonts. For genuinely offline-first behaviour, self-host
 them and add them to the service worker shell list.
+
+## What is already filled in
+
+Bars, groceries, trails, sights, transport and the emergency and useful-number
+lists carry real, researched content rather than placeholders — five aperitivo
+addresses, the four nearest supermarkets, five walks, five things worth seeing.
+The restaurants still wait for Mario's own words.
+
+One finding worth keeping: the closest supermarket is not one of those in the
+centre but the Penny on Corso Europa, which sits almost straight downhill from
+the house.
 
 ## Local numbers
 

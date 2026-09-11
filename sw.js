@@ -10,7 +10,7 @@
  * config/ never need it.
  */
 
-const CACHE = "lacrema-v5";
+const CACHE = "lacrema-v6";
 
 const SHELL = [
   "./",

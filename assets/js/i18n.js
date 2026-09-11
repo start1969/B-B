@@ -16,7 +16,7 @@ export const UI = {
   it: {
     back: "Indietro",
     home: "Casa",
-    wifi: { label: "Wi-Fi di casa", ssid: "Rete", password: "Password", copy: "Copia", copied: "Copiato" },
+    wifi: { label: "Wi-Fi di casa", ssid: "Rete", password: "Password", copy: "Copia", copied: "Copiato", openLabel: "Rete aperta, nessuna password" },
     call: "Chiama Mario",
     directions: "Come arrivare",
     directionsSub: "Apri le mappe",
@@ -36,7 +36,7 @@ export const UI = {
   en: {
     back: "Back",
     home: "Home",
-    wifi: { label: "House Wi-Fi", ssid: "Network", password: "Password", copy: "Copy", copied: "Copied" },
+    wifi: { label: "House Wi-Fi", ssid: "Network", password: "Password", copy: "Copy", copied: "Copied", openLabel: "Open network, no password" },
     call: "Call Mario",
     directions: "Directions",
     directionsSub: "Open maps",
@@ -56,7 +56,7 @@ export const UI = {
   de: {
     back: "Zurück",
     home: "Start",
-    wifi: { label: "WLAN im Haus", ssid: "Netzwerk", password: "Passwort", copy: "Kopieren", copied: "Kopiert" },
+    wifi: { label: "WLAN im Haus", ssid: "Netzwerk", password: "Passwort", copy: "Kopieren", copied: "Kopiert", openLabel: "Offenes Netz, kein Passwort" },
     call: "Mario anrufen",
     directions: "Anfahrt",
     directionsSub: "Karte öffnen",
